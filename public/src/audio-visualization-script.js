@@ -1,5 +1,6 @@
 const container = document.getElementById('container')
 const canvas = document.getElementById('canvas')
+const file = document.getElementById('fileUpload')
 
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
@@ -18,11 +19,11 @@ container.addEventListener('click', function () {
     analyser = audioCtx.createAnalyser()
     audioSrc.connect(analyser)
     analyser.connect(audioCtx.destination)
-    analyser.fftSize = 64
+    analyser.fftSize = 1024 //Amount of audio bars
     const bufferLength = analyser.frequencyBinCount
     const dataArray = new Uint8Array(bufferLength)
 
-    const barWidth = canvas.width / bufferLength
+    const barWidth = (canvas.width/2) / bufferLength
     let barHeight
     let x
 
@@ -30,14 +31,64 @@ container.addEventListener('click', function () {
         x = 0
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         analyser.getByteFrequencyData(dataArray)
-        for (let i = 0; i < bufferLength; i++) {
-            barHeight = dataArray[i]
-            ctx.fillStyle = 'white'
-            ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight)
-            x += barWidth
-        }
+        drawVisualizer(bufferLength, x, barWidth, barHeight, dataArray)
 
         requestAnimationFrame(animate)
     }
     animate()
 })
+
+file.addEventListener('change', function () {
+    const files = this.files
+    const audio = document.getElementById('audio')
+    audio.src = URL.createObjectURL(files[0]) //Audio to text
+    audio.load()
+    audio.play()
+
+    audioSrc = audioCtx.createMediaElementSource(audio)
+    analyser = audioCtx.createAnalyser()
+    audioSrc.connect(analyser)
+    analyser.connect(audioCtx.destination)
+    analyser.fftSize = 64
+    const bufferLength = analyser.frequencyBinCount
+    const dataArray = new Uint8Array(bufferLength)
+
+    const barWidth = (canvas.width/2) / bufferLength
+    let barHeight
+    let x
+
+    function animate() {
+        x = 0
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        analyser.getByteFrequencyData(dataArray)
+        drawVisualizer(bufferLength, x, barWidth, barHeight, dataArray)
+
+        requestAnimationFrame(animate)
+    }
+    animate()
+})
+
+function drawVisualizer(bufferLength, x, barWidth, barHeight, dataArray) {
+    for (let i = 0; i < bufferLength; i++) {
+        barHeight = dataArray[i] * 2
+        const red = i * barHeight/20
+        const green = i/2
+        const blue = barHeight/2
+        ctx.fillStyle = 'white'
+        ctx.fillRect(canvas.width/2 - x, canvas.height - barHeight - 20, barWidth, 15)
+        ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')'
+        ctx.fillRect(canvas.width/2 - x, canvas.height - barHeight, barWidth, barHeight)
+        x += barWidth
+    }
+    for (let i = 0; i < bufferLength; i++) {
+        barHeight = dataArray[i] * 2
+        const red = i * barHeight/20
+        const green = i/2
+        const blue = barHeight/2
+        ctx.fillStyle = 'white'
+        ctx.fillRect(x, canvas.height - barHeight - 30, barWidth, 15)
+        ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')'
+        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight)
+        x += barWidth
+    }
+}

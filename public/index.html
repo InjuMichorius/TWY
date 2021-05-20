@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +9,13 @@
     <link rel="stylesheet" href="./styles/style.css">
     <script src="./src/audio-visualization-script.js" defer></script>
 </head>
+
 <body>
     <div id="container">
-        <canvas id="canvas">
-            <audio id="audio" controls></audio>
-        </canvas>
+        <canvas id="canvas"></canvas>
+        <audio id="audio" controls></audio>
+        <input type="file" id="fileUpload" accept="audio/*" />
     </div>
 </body>
+
 </html>

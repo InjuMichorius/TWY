@@ -15,7 +15,6 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #f6e9f0 url('../img/background.jpg');
-    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -30,11 +29,31 @@ body {
 
 /* ARTIST PROFILE */
 
+.artist {
+    /* background: #f6e9f0 url('../img/background.jpg');
+    background-repeat: no-repeat; */
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding: 1rem 0;
+}
+
+.artist::after {
+    content: "";
+    background: #f6e9f0 url('../img/background.jpg');
+    opacity: 85%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
 h1 {
     background-color: white;
     width: 30%;
     text-align: center;
-    margin: 1rem 0 0 0;
     border-radius: 0 100vw 100vw 0;
 }
 
@@ -72,7 +91,7 @@ ul {
 .message {
     background: black;
     color: white;
-    margin: 1rem 1rem;
+    margin: 1rem 1.5rem;
     padding: 0.5rem 1rem;
 }
 
@@ -87,6 +106,29 @@ ul {
 .text_meta {
     color: #A1E807;
     font-size: 1rem;
+}
+
+li.twy p.text_meta::after {
+    content: "";
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    background: black;
+    margin-left: -4.1rem;
+    margin-top: -.5rem;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+li.you p.text_meta::after {
+    content: "";
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    background: black;
+    right: 0;
+    margin-right: .69rem;
+    margin-top: -.5rem;
+    clip-path: polygon(100% 0, 0 0, 0 100%);
 }
 
 
@@ -108,7 +150,7 @@ div.send_message {
     border-radius: 16px 0 0 16px;
     background: white;
     border: none;
-    color: white;
+    color: black;
     font-size: 1rem;
     padding: 1rem;
 }
@@ -135,3 +177,6 @@ div.send_message {
     width: 25px;
     height: 25px;
 }
+
+
+/* 769px (desktop) versie */

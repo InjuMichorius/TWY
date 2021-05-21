@@ -103,6 +103,7 @@ main {
     border: 5px solid var(--secondary);
     max-width: 800px;
     position: relative;
+    /* overflow-y: scroll; */
 }
 
 .chat-box p {
@@ -155,14 +156,14 @@ main {
     align-items: baseline;
     justify-content: center;
     width: 100%;
-    margin-bottom: 2em;
+    margin: 2em 0;
 }
 
 .message-input input {
     height: 1.3em;
-    width: 80%;
+    width: 55%;
     padding: 0.5em;
-    margin-right: 1em;
+    margin: 0 6%;
     border: none;
     border-bottom: solid 5px var(--secondary);
     background: none;
@@ -170,6 +171,7 @@ main {
     font-size: 1.3em;
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
+    transition: 1s;
 }
 
 .message-input input:focus {
@@ -179,11 +181,25 @@ main {
 }
 
 .message-input button {
-    width: 20%;
     height: 70px;
     width: 70px;
     background: var(--secondary);
     border: solid 5px var(--secondary);
+    padding: 0;
+    /* transition: 1s; */
+}
+
+.message-input button:hover{
+    cursor: pointer;
+}
+
+.message-input button img {
+    width: 80%;
+}
+
+.message-input button:active {
+    background: var(--thunderboomgreen);
+    border: solid 5px var(--thunderboomgreen);
 }
 
 footer {

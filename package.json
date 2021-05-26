@@ -21,6 +21,7 @@
     },
     "homepage": "https://github.com/HappyPantss/TWY#readme",
     "dependencies": {
+        "augmented-ui": "^2.0.0",
         "dotenv": "^9.0.2",
         "ejs": "^3.1.6",
         "express": "^4.17.1",

@@ -1,6 +1,12 @@
-let messages = document.querySelector('ul')
-let gameForm = document.querySelector('#gameForm')
-let input = document.querySelector('#textInput')
+let messages = document.querySelector('ul');
+let gameForm = document.querySelector('#gameForm');
+let input = document.querySelector('#textInput');
+const voice = document.querySelector(".btnVoice");
+const textInput = document.querySelector("#textInput");
+const send = document.querySelector(".btnAnswer");
+
+var SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+var recorder = new SpeechRecognition();
 
 gameForm.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -47,3 +53,38 @@ function sendMessage() {
         }, 1000);
     }
 }
+
+recorder.onstart = () => {
+    console.log('Voice activated')
+};
+
+recorder.onresult = (event) => {
+    const resultIndex = event.resultIndex;
+    const transcript = event.results[resultIndex][0].transcript
+    textInput.value = transcript;
+    console.log(transcript);
+};
+
+voice.addEventListener('click', () => {
+    console.log('click')
+    recorder.start();
+});
+
+send.addEventListener('click', () => {
+    // console.log(inputField.value)   
+    if (textInput.value) {
+        const fanMessage = document.createElement("li");
+        const meta = document.createElement("p");
+        const text = document.createElement("p");
+        fanMessage.classList.add("message");
+        fanMessage.classList.add("you");
+        meta.classList.add("text_meta")
+        meta.innerText = "You";
+        text.classList.add("text");
+        text.innerText = textInput.value;
+        fanMessage.appendChild(meta);
+        fanMessage.appendChild(text);
+        messages.appendChild(fanMessage);
+        textInput.value = "";
+    }
+});

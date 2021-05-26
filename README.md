@@ -6,11 +6,11 @@ TWY is an upcoming music artist, created by [Thunderboom Records](https://www.th
 [Click here for the live demo](https://puginarug.com/)
 
 # Table of Contents 🧭
-1. [Goal]()
-2. [Getting started]()
-3. [Wishlist]()
-4. [Practises]()
-5. [Packages]()
+1. [Goal](https://github.com/HappyPantss/TWY#goal-)
+2. [Getting started](https://github.com/HappyPantss/TWY#getting-started-)
+3. [Wishlist](https://github.com/HappyPantss/TWY#feature-wishlist--backlog-)
+4. [Practises](https://github.com/HappyPantss/TWY#design-patterns-and-best-practices-)
+5. [Packages](https://github.com/HappyPantss/TWY#packages-used-)
 
 # Goal 💪🏻
 The goal of this project is to make fans able to communicate with TWY. The interaction should flow easily and naturally. Because of our short time-span, the project is not focused on building an entire chatbot with a huge personality. Instead, we want to focus on user interface and experience.

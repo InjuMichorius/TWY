@@ -19,7 +19,7 @@ container.addEventListener('click', function () {
     analyser = audioCtx.createAnalyser()
     audioSrc.connect(analyser)
     analyser.connect(audioCtx.destination)
-    analyser.fftSize = 1024 //Amount of audio bars
+    analyser.fftSize = 512 //Amount of audio bars
     const bufferLength = analyser.frequencyBinCount
     const dataArray = new Uint8Array(bufferLength)
 
@@ -49,7 +49,7 @@ file.addEventListener('change', function () {
     analyser = audioCtx.createAnalyser()
     audioSrc.connect(analyser)
     analyser.connect(audioCtx.destination)
-    analyser.fftSize = 64
+    analyser.fftSize = 512
     const bufferLength = analyser.frequencyBinCount
     const dataArray = new Uint8Array(bufferLength)
 
@@ -70,25 +70,23 @@ file.addEventListener('change', function () {
 
 function drawVisualizer(bufferLength, x, barWidth, barHeight, dataArray) {
     for (let i = 0; i < bufferLength; i++) {
-        barHeight = dataArray[i] * 2
+        barHeight = dataArray[i] * 1.5
+        ctx.save()
+        ctx.translate(canvas.width/2, canvas.height/2) //Centerpoint to middle of screen
+        ctx.rotate(i + Math.PI * 4 / bufferLength) //Rotate canvas
+        //Identify colors
         const red = i * barHeight/20
         const green = i/2
-        const blue = barHeight/2
-        ctx.fillStyle = 'white'
-        ctx.fillRect(canvas.width/2 - x, canvas.height - barHeight - 20, barWidth, 15)
+        const blue = barHeight
         ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')'
-        ctx.fillRect(canvas.width/2 - x, canvas.height - barHeight, barWidth, barHeight)
+
+        // const hue = i * 5
+        // ctx.fillStyle = 'hsl(' + hue + ',100%, 50%)'
+        
+
+        //Create shapes
+        ctx.fillRect(0, 0, barWidth, barHeight)
         x += barWidth
-    }
-    for (let i = 0; i < bufferLength; i++) {
-        barHeight = dataArray[i] * 2
-        const red = i * barHeight/20
-        const green = i/2
-        const blue = barHeight/2
-        ctx.fillStyle = 'white'
-        ctx.fillRect(x, canvas.height - barHeight - 30, barWidth, 15)
-        ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')'
-        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight)
-        x += barWidth
+        ctx.restore()
     }
 }

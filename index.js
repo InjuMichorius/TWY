@@ -11,7 +11,7 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'src/public/views'))
 
 app.get('/', function(req, res) {
-    res.render("index")
+    res.render("chatbot")
 });
 
 server.listen(port, () => {

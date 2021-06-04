@@ -1,17 +1,21 @@
 <%- include ("./partials/head.ejs") %>
     <div class="container">
-        <div class="twy-image">
+        <div class="artist">
+            <div id="name">
+                <h1>TWY</h1>
+            </div>
+            <div id="pfp">
+                <img src="img/image-4.png" alt="Artist TWY">
+            </div>
         </div>
         <div class="chat">
             <ul class="chat_messages">
-                <li class="message twy">
+                <!-- <li class="message twy">
                     <p class="text_meta">
                         TWY
                     </p>
                     <p class="text">
-                        <span>
-                            Hey what’s up! You must be one of my many fans, where would you like to talk about?
-                        </span>
+                        <span>Hey what’s up! You must be one of my many fans, where would you like to talk about?</span>
                     </p>
                 </li>
                 <li class="message you">
@@ -29,17 +33,22 @@
                     <p class="text">
                         <span>I’m fine, thank you for asking!</span>
                     </p>
-                </li>
+                </li> -->
             </ul>
         </div>
-        <div data-augmented-ui="tl-clip tr-2-clip-x both" class="send_message">
+        <div class="send_message">
             <form id="gameForm">
                 <input id="textInput" type="text">
-                <button class="btnAnswer" id="inputBtn">Send</button>
-                <button class="btnVoice" id="inputBtn">
-                        <img src="../img/mic.svg" alt="">
-                    </button>
+                <button class="btnAnswer" id="inputBtn">Send</button><br>
             </form>
         </div>
+        <div class="controls">
+            <button class="btnPlay testStart" id="inputBtn">Play</button>
+            <button class="btnStop testStop" id="inputBtn">Stop</button>
+            <button class="btnLow testLow" id="inputBtn">Add Low</button>
+            <button class="btnHigh testHigh" id="inputBtn">Add High</button>
+            <button class="btnRemove testRemove" id="inputBtn">Remove</button>
+        </div>
+
     </div>
     <%- include ("./partials/footer.ejs") %>

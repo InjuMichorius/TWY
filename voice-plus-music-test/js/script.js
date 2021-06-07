@@ -9,18 +9,33 @@ var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
 var recognition = new SpeechRecognition();
 recognition.interimResults = true;
 
-const playBtn = document.getElementById('play');
-const pauseBtn = document.getElementById('pause');
-
 let bpm = 150;
+let kickBeat = null
+let snareBeat = null
+let hihatBeat = null
 
-const kickPattern1 = [0, 1, 0, 0, 0, 1, 0, 0];
-const kickPattern2 = [0, 1, 0, 0, 1, 1, 0, 0];
-const kickPattern3 = [1, 1, 0, 0, 1, 1, 0, 0];
-const kickPattern4 = [0, 1, 0, 0, 0, 1, 1, 0];
+const play = document.getElementById('play')
+const pause = document.getElementById('pause')
+play.style.display = "none"
 
-const snarePattern1 = [0, 0, 0, 1, 0, 0, 0, 1];
-const snarePattern2 = [1, 0, 0, 1, 1, 0, 0, 1];
+const kickPatterns = [
+    [0, 1, 0, 0, 0, 1, 0, 0],
+    [0, 1, 0, 0, 1, 1, 0, 0],
+    [1, 1, 0, 0, 1, 1, 0, 0],
+    [0, 1, 0, 0, 0, 1, 1, 0]
+]
+
+const snarePatterns = [
+    [0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 1, 1, 0, 0, 1],
+    [0, 0, 0, 1, 1, 0, 0, 1]
+]
+
+const randomKick = kickPatterns[Math.floor(Math.random() * kickPatterns.length)];
+console.log(randomKick);
+
+const randomSnare = snarePatterns[Math.floor(Math.random() * snarePatterns.length)];
+console.log(randomSnare);
 
 speechButton.addEventListener('click', function () {
     console.log("Speech enabled")
@@ -41,73 +56,67 @@ recognition.addEventListener('result', (e) => {
     }
 })
 
+let underEight = Math.floor(Math.random() * 8) + 1;
+let underThirteen = Math.floor(Math.random() * 13) + 1;
+let underFive = Math.floor(Math.random() * 5) + 1;
+
+function createInstruments() {
+    blip.sampleLoader()
+        .samples({
+            'kick': `./sounds/kick${underEight}.wav`,
+            'snare': `./sounds/snare${underThirteen}.wav`,
+            'hihat': `./sounds/hihat${underFive}.wav`,
+        })
+        .done(loaded)
+        .load();
+
+    function loaded() {
+
+        console.log("Samples are now loaded");
+
+        var kick = blip.clip().sample('kick');
+        var snare = blip.clip().sample('snare');
+        var hihat = blip.clip().sample('hihat');
+
+        kickBeat = blip.loop()
+            .tempo(bpm)
+            .data(randomKick)
+            .tick(function (t, d) {
+                if (d) {
+                    kick.play(t)
+                }
+            });
+
+        snareBeat = blip.loop()
+            .tempo(bpm)
+            .data(randomSnare)
+            .tick(function (t, d) {
+                if (d) {
+                    snare.play(t)
+                }
+            });
+
+        hihatBeat = blip.loop()
+            .tempo(bpm)
+            .tick(function (t) {
+                hihat.play(t)
+            });
+
+        kickBeat.start();
+        snareBeat.start();
+        hihatBeat.start();
+
+    }
+}
+
 recognition.addEventListener('end', (e) => {
     let lowerText = text.toLowerCase()
 
     if (lowerText.search('random') >= 0 || lowerText.search('doe maar wat') >= 0) {
         let newListItem = document.createElement('li'); // create li
         let text = document.createTextNode(`Wat vind je van een ${lowerText}? Laten we verder gaan met een snare! Wat voor snare wil je?`); // create text node
-        let underEight = Math.floor(Math.random() * 8) + 1;
-        let underThirteen = Math.floor(Math.random() * 13) + 1;
-        let underFour = Math.floor(Math.random() * 4) + 1;
 
-        blip.sampleLoader()
-            .samples({
-                'kick': `./sounds/kick${underEight}.wav`,
-                'snare': `./sounds/snare${underThirteen}.wav`,
-                'hihat': `./sounds/hihat${underFour}.wav`,
-            })
-            .done(loaded)
-            .load();
-
-        function loaded() {
-
-            console.log("Samples are now loaded");
-
-            var kick = blip.clip()
-                .sample('kick');
-
-            var snare = blip.clip()
-                .sample('snare');
-
-            var hihat = blip.clip()
-                .sample('hihat');
-
-            var kickBeat = blip.loop()
-                .tempo(bpm)
-                .data(kickPattern1)
-                .tick(function (t, d) {
-                    if (d) {
-                        kick.play(t)
-                    }
-                });
-
-            var snareBeat = blip.loop()
-                .tempo(bpm)
-                .data(snarePattern1)
-                .tick(function (t, d) {
-                    if (d) {
-                        snare.play(t)
-                    }
-                });
-
-            var hihatBeat = blip.loop()
-                .tempo(bpm)
-                .tick(function (t) {
-                    hihat.play(t)
-                });
-
-            kickBeat.start();
-            snareBeat.start();
-            hihatBeat.start();
-
-            pauseBtn.addEventListener('click', function () {
-                kickBeat.stop();
-                snareBeat.stop();
-                hihatBeat.stop();
-            });
-
-        }
+        createInstruments();
 
         newListItem.appendChild(text); // append text node to li node
         ul.appendChild(newListItem); // append li node to list
@@ -123,28 +132,24 @@ recognition.addEventListener('end', (e) => {
 
         newListItem.appendChild(text); // append text node to li node
         ul.appendChild(newListItem); // append li node to list
-    } else if (lowerText.search('hihat') >= 0) {
-        let newListItem = document.createElement('li'); // create li
-        let text = document.createTextNode(`Just a classic ${lowerText} :). Maybe you can add some rides!`); // create text node
 
-        //add Mp3 here
-        // currentRide = new Audio('./audio/rides/ride.mp3')
-        // currentKick.play()
-        // currentSnare.play()
-        // currentRide.play()
+    } else if (lowerText.search('langzaam') >= 0 || lowerText.search('langzamer') >= 0 || lowerText.search('rustiger') >= 0) {
+        let newListItem = document.createElement('li'); // create li
+        let text = document.createTextNode(`Oke je wilt het dus ${lowerText}. Komt voor elkaar!`); // create text node
+
+        bpm = bpm - 50;
+        console.log(bpm)
+        createInstruments();
 
         newListItem.appendChild(text); // append text node to li node
         ul.appendChild(newListItem); // append li node to list
-    } else if (lowerText.search('crash') >= 0) {
+    } else if (lowerText.search('snel') >= 0 || lowerText.search('sneller') >= 0 || lowerText.search('faster') >= 0) {
         let newListItem = document.createElement('li'); // create li
-        let text = document.createTextNode(`Ah, so you like ${lowerText}? What about this Crash?`); // create text node
+        let text = document.createTextNode(`Oke je wilt het dus ${lowerText}. Komt voor elkaar!`); // create text node
 
-        //add Mp3 here
-        // currentCrash = new Audio('./audio/crashes/crash.mp3')
-        // currentKick.play()
-        // currentSnare.play()
-        // currentRide.play()
-        // currentCrash.play()
+        bpm = bpm + 50;
+        console.log(bpm)
+        createInstruments();
 
         newListItem.appendChild(text); // append text node to li node
         ul.appendChild(newListItem); // append li node to list
@@ -168,3 +173,9 @@ function unrecognized() {
     newListItem.appendChild(text)
     ul.appendChild(newListItem)
 }
+
+pause.addEventListener('click', () => {
+    kickBeat.stop()
+    snareBeat.stop()
+    hihatBeat.stop()
+})

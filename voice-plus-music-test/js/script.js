@@ -37,10 +37,9 @@ console.log(randomKick);
 const randomSnare = snarePatterns[Math.floor(Math.random() * snarePatterns.length)];
 console.log(randomSnare);
 
-speechButton.addEventListener('click', function () {
-    console.log("Speech enabled")
-    recognition.start()
-})
+let underEight = Math.floor(Math.random() * 8) + 1;
+let underThirteen = Math.floor(Math.random() * 13) + 1;
+let underFive = Math.floor(Math.random() * 5) + 1;
 
 recognition.addEventListener('result', (e) => {
     text = Array.from(e.results)
@@ -55,10 +54,6 @@ recognition.addEventListener('result', (e) => {
         newListItem = document.createElement('li')
     }
 })
-
-let underEight = Math.floor(Math.random() * 8) + 1;
-let underThirteen = Math.floor(Math.random() * 13) + 1;
-let underFive = Math.floor(Math.random() * 5) + 1;
 
 function createInstruments() {
     blip.sampleLoader()
@@ -121,23 +116,11 @@ recognition.addEventListener('end', (e) => {
         newListItem.appendChild(text); // append text node to li node
         ul.appendChild(newListItem); // append li node to list
 
-    } else if (lowerText.search('snare') >= 0) {
-        let newListItem = document.createElement('li'); // create li
-        let text = document.createTextNode(`I think this ${lowerText} will fit nicely! What about a hihat?`); // create text node
-
-        //add Mp3 here
-        // currentSnare = new Audio('./audio/snares/snare.mp3')
-        // currentKick.play()
-        // currentSnare.play()
-
-        newListItem.appendChild(text); // append text node to li node
-        ul.appendChild(newListItem); // append li node to list
-
     } else if (lowerText.search('langzaam') >= 0 || lowerText.search('langzamer') >= 0 || lowerText.search('rustiger') >= 0) {
         let newListItem = document.createElement('li'); // create li
         let text = document.createTextNode(`Oke je wilt het dus ${lowerText}. Komt voor elkaar!`); // create text node
 
-        bpm = bpm - 50;
+        bpm = bpm - 30;
         console.log(bpm)
         createInstruments();
 
@@ -147,21 +130,12 @@ recognition.addEventListener('end', (e) => {
         let newListItem = document.createElement('li'); // create li
         let text = document.createTextNode(`Oke je wilt het dus ${lowerText}. Komt voor elkaar!`); // create text node
 
-        bpm = bpm + 50;
+        bpm = bpm + 30;
         console.log(bpm)
         createInstruments();
 
         newListItem.appendChild(text); // append text node to li node
         ul.appendChild(newListItem); // append li node to list
-    } else if (lowerText.search('normaal') >= 0) {
-        currentBeat.playbackRate = 1
-        currentBeat.play()
-    } else if (lowerText.search('sneller') >= 0) {
-        currentBeat.playbackRate = 1.2
-        currentBeat.play()
-    } else if (lowerText.search('langzamer') >= 0) {
-        currentBeat.playbackRate = 0.8
-        currentBeat.play()
     } else {
         unrecognized()
     }
@@ -174,8 +148,45 @@ function unrecognized() {
     ul.appendChild(newListItem)
 }
 
-pause.addEventListener('click', () => {
-    kickBeat.stop()
-    snareBeat.stop()
-    hihatBeat.stop()
-})
+pause.addEventListener('click', pauseButton)
+play.addEventListener('click', playButton)
+speechButton.addEventListener('click', talk)
+
+function stopAudio() {
+    if (kickBeat !== null) {
+        kickBeat.stop()
+    }
+    if (snareBeat !== null) {
+        snareBeat.stop()
+    }
+    if (hihatBeat !== null) {
+        hihatBeat.stop()
+    }
+}
+
+function talk() {
+    console.log("Speech enabled")
+    recognition.start()
+    stopAudio()
+}
+
+function pauseButton() {
+    stopAudio()
+    pause.style.display = "none"
+    play.style.display = "inline"
+}
+
+function playButton() {
+    if (!kickBeat !== null) {
+        kickBeat.start()
+    }
+    if (!snareBeat !== null) {
+        snareBeat.start()
+    }
+    if (!hihatBeat !== null) {
+        hihatBeat.start()
+    }
+    console.log('Hello world')
+    play.style.display = "none"
+    pause.style.display = "inline"
+}

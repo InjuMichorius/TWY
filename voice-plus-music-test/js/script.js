@@ -44,44 +44,18 @@ recognition.addEventListener('result', (e) => {
 recognition.addEventListener('end', (e) => {
     let lowerText = text.toLowerCase()
 
-    if (lowerText.search('kick one') >= 0 || lowerText.search('kik een') >= 0) {
+    if (lowerText.search('random') >= 0 || lowerText.search('doe maar wat') >= 0) {
         let newListItem = document.createElement('li'); // create li
         let text = document.createTextNode(`Wat vind je van een ${lowerText}? Laten we verder gaan met een snare! Wat voor snare wil je?`); // create text node
+        let underEight = Math.floor(Math.random() * 8) + 1;
+        let underThirteen = Math.floor(Math.random() * 13) + 1;
+        let underFour = Math.floor(Math.random() * 4) + 1;
 
         blip.sampleLoader()
             .samples({
-                'kick1': './sounds/kick1.wav',
-                'kick2': './sounds/kick2.wav',
-                'kick3': './sounds/kick3.wav',
-                'kick4': './sounds/kick4.wav',
-                'kick5': './sounds/kick5.wav',
-                'kick6': './sounds/kick6.wav',
-                'kick7': './sounds/kick7.wav',
-                'kick8': './sounds/kick8.wav',
-                'snare1': './sounds/snare1.wav',
-                'snare2': './sounds/snare2.wav',
-                'snare3': './sounds/snare3.wav',
-                'snare4': './sounds/snare4.wav',
-                'snare5': './sounds/snare5.wav',
-                'snare6': './sounds/snare6.wav',
-                'snare7': './sounds/snare7.wav',
-                'snare8': './sounds/snare8.wav',
-                'snare9': './sounds/snare9.wav',
-                'snare10': './sounds/snare10.wav',
-                'snare11': './sounds/snare11.wav',
-                'snare12': './sounds/snare12.wav',
-                'snare13': './sounds/snare13.wav',
-                'hihat1': './sounds/hihat1.wav',
-                'hihat2': './sounds/hihat2.wav',
-                'hihat3': './sounds/hihat3.wav',
-                'hihat4': './sounds/hihat4.wav',
-                'tom1': './sounds/tom1.wav',
-                'tom2': './sounds/tom2.wav',
-                'tom3': './sounds/tom3.wav',
-                'tom4': './sounds/tom4.wav',
-                'crash1': './sounds/crash1.wav',
-                'crash2': './sounds/crash2.wav',
-                'crash3': './sounds/crash3.wav'
+                'kick': `./sounds/kick${underEight}.wav`,
+                'snare': `./sounds/snare${underThirteen}.wav`,
+                'hihat': `./sounds/hihat${underFour}.wav`,
             })
             .done(loaded)
             .load();
@@ -91,17 +65,17 @@ recognition.addEventListener('end', (e) => {
             console.log("Samples are now loaded");
 
             var kick = blip.clip()
-                .sample('kick6');
+                .sample('kick');
 
             var snare = blip.clip()
-                .sample('snare7');
+                .sample('snare');
 
             var hihat = blip.clip()
-                .sample('hihat3');
+                .sample('hihat');
 
             var kickBeat = blip.loop()
                 .tempo(bpm)
-                .data(kickPattern3)
+                .data(kickPattern1)
                 .tick(function (t, d) {
                     if (d) {
                         kick.play(t)

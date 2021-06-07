@@ -4,7 +4,8 @@
         </div>
         <div class="chat">
             <ul class="chat_messages">
-                <li class="message twy">
+                <li class="message twy" data-augmented-ui="
+                br-clip" class="styleme">
                     <p class="text_meta">
                         TWY
                     </p>
@@ -14,7 +15,8 @@
                         </span>
                     </p>
                 </li>
-                <li class="message you">
+                <li class="message you" data-augmented-ui="
+                bl-clip" class="styleme">
                     <p class="text_meta">
                         YOU
                     </p>
@@ -22,7 +24,8 @@
                         Hey I'm fine, and you?
                     </p>
                 </li>
-                <li class="message twy">
+                <li class="message twy" data-augmented-ui="
+                br-clip" class="styleme">
                     <p class="text_meta">
                         TWY
                     </p>
@@ -34,10 +37,13 @@
         </div>
         <div data-augmented-ui="tl-clip tr-2-clip-x both" class="send_message">
             <form id="gameForm">
-                <input id="textInput" type="text">
-                <button class="btnAnswer" id="inputBtn">Send</button>
-                <button class="btnVoice" id="inputBtn">
-                        <img src="../img/mic.svg" alt="">
+                <input id="textInput" type="text" data-augmented-ui="
+                bl-clip both " class="styleme">
+                <button class="btnAnswer" id="inputBtn">Verstuur</button>
+                <button class="btnVoice" id="inputBtn" data-augmented-ui="
+                tr-clip br-clip " class="styleme">
+                    Opnemen
+                        <!-- <img src="../img/mic.svg" alt=""> -->
                     </button>
             </form>
         </div>

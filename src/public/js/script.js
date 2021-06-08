@@ -1,4 +1,4 @@
-let messages = document.querySelector('.chat_messages')
+let messages = document.querySelector('ul')
 let gameForm = document.querySelector('#gameForm')
 let input = document.querySelector('#textInput')
 const voice = document.querySelector(".btnVoice")
@@ -70,21 +70,21 @@ voice.addEventListener('click', () => {
     recorder.start()
 });
 
-send.addEventListener('click', () => {
-    // console.log(inputField.value)   
-    if (textInput.value) {
-        const fanMessage = document.createElement("li")
-        const meta = document.createElement("p")
-        const text = document.createElement("p")
-        fanMessage.classList.add("message")
-        fanMessage.classList.add("you")
-        meta.classList.add("text_meta")
-        meta.innerText = "You"
-        text.classList.add("text")
-        text.innerText = textInput.value
-        fanMessage.appendChild(meta)
-        fanMessage.appendChild(text)
-        messages.appendChild(fanMessage)
-        textInput.value = ""
-    }
-});
+// send.addEventListener('click', () => {
+//     // console.log(inputField.value)   
+//     if (textInput.value) {
+//         const fanMessage = document.createElement("li")
+//         const meta = document.createElement("p")
+//         const text = document.createElement("p")
+//         fanMessage.classList.add("message")
+//         fanMessage.classList.add("you")
+//         meta.classList.add("text_meta")
+//         meta.innerText = "You"
+//         text.classList.add("text")
+//         text.innerText = textInput.value
+//         fanMessage.appendChild(meta)
+//         fanMessage.appendChild(text)
+//         messages.appendChild(fanMessage)
+//         textInput.value = ""
+//     }
+// });

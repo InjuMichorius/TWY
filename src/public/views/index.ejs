@@ -2,10 +2,12 @@
     <div class="container">
         <div class="twy-image">
         </div>
+        <div class="lightsaber">
+            <div class="blade"></div>
+        </div>
         <div class="chat">
             <ul class="chat_messages">
-                <li class="message twy" data-augmented-ui="
-                br-clip" class="styleme">
+                <li class="message twy">
                     <p class="text_meta">
                         TWY
                     </p>
@@ -15,33 +17,16 @@
                         </span>
                     </p>
                 </li>
-                <li class="message you" data-augmented-ui="
-                bl-clip" class="styleme">
-                    <p class="text_meta">
-                        YOU
-                    </p>
-                    <p class="text">
-                        Hey I'm fine, and you?
-                    </p>
-                </li>
-                <li class="message twy" data-augmented-ui="
-                br-clip" class="styleme">
-                    <p class="text_meta">
-                        TWY
-                    </p>
-                    <p class="text">
-                        <span>I’m fine, thank you for asking!</span>
-                    </p>
-                </li>
             </ul>
         </div>
-        <div data-augmented-ui="tl-clip tr-2-clip-x both" class="send_message">
+        <div data-augmented-ui="tl-clip tr-2-clip-x border" class="send_message">
             <form id="gameForm">
                 <input id="textInput" type="text" data-augmented-ui="
-                bl-clip both " class="styleme">
-                <button class="btnAnswer" id="inputBtn">Verstuur</button>
+                bl-clip br-clip border">
+                <button class="btnAnswer" id="inputBtn" data-augmented-ui="
+                bl-clip">Verstuur</button>
                 <button class="btnVoice" id="inputBtn" data-augmented-ui="
-                tr-clip br-clip " class="styleme">
+                tr-clip br-clip ">
                     Opnemen
                         <!-- <img src="../img/mic.svg" alt=""> -->
                     </button>

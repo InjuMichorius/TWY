@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "augmented-ui": "^2.0.0",
     "tone": "^14.7.77"
   }
 }

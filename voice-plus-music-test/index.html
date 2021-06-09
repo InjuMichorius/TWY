@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Blip. test</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/augmented-ui@2/augmented-ui.min.css">
+    <title> TWY</title>
 </head>
 
 <body>
@@ -14,14 +15,47 @@
 
     </header>
     <main>
-        <button id="talk">Speech</button>
-        <button id="play">Play</button>
-        <button id="pause">Pause</button>
-        <ul id="chat">
+        <div class="container">
+            <div class="twy-image">
+            </div>
+            <div class="lightsaber">
+                <div class="blade"></div>
+            </div>
+            <div class="chat">
+                <ul class="chat_messages">
+                    <li class="message twy">
+                        <p class="text_meta">
+                            TWY
+                        </p>
+                        <p class="text">
+                            <span>
+                                Hey jij daar! Mijn naam is TWY :) Ik hou van muziek maken en ik ben ontzettend beniewd
+                                naar de muziek die jullie op
+                                aarde luisteren. Laten we beignnen met een beat, wat voor beat wil je?
+                            </span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="send_message">
+                <!-- <input id="textInput" type="text" data-augmented-ui="bl-clip br-clip" placeholder="Tekst">
+                        <button class="inputBtn" id="btnAnswer" data-augmented-ui="bl-clip">Verstuur</button> -->
+                <div id="voiceWrapper">
+                    <button id="talk">Speech</button>
+                    <p id="speechRec"></p>
+                </div>
+                <!-- <button class="inputBtn" id="btnPlay" data-augmented-ui="tl-clip">Play</button> -->
+            </div>
+        </div>
+
+        <!-- <button id="talk">Speech</button> -->
+        <!--<button id="play">Play</button>
+        <button id="pause">Pause</button> -->
+        <!-- <ul id="chat">
             <li>Fakka! Mijn naam is TWY :) Ik ben ontzettend geinteresseerd in de muziek die jullie op aarde spelen.
                 Zullen we samen een beat maken? Wat voor kick wil je?</li>
-        </ul>
-        <button id="synthBtn">Tone.js</button>
+        </ul> -->
+        <!-- <button id="synthBtn">Tone.js</button> -->
     </main>
     <script src="https://cdn.rawgit.com/jshanley/blip/master/blip.min.js"></script>
     <script type="module" src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>

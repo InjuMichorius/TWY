@@ -19,18 +19,16 @@
                 </li>
             </ul>
         </div>
-        <div data-augmented-ui="tl-clip tr-2-clip-x border" class="send_message">
-            <form id="gameForm">
-                <input id="textInput" type="text" data-augmented-ui="
-                bl-clip br-clip border">
-                <button class="btnAnswer" id="inputBtn" data-augmented-ui="
-                bl-clip">Verstuur</button>
-                <button class="btnVoice" id="inputBtn" data-augmented-ui="
-                tr-clip br-clip ">
-                    Opnemen
-                        <!-- <img src="../img/mic.svg" alt=""> -->
-                    </button>
-            </form>
+        <div class="send_message_wrapper">
+            <div data-augmented-ui="tl-clip tr-2-clip-x border" class="send_message">
+                <form id="gameForm">
+                    <input id="textInput" type="text" data-augmented-ui="bl-clip br-clip" placeholder="Tekst">
+                    <button class="inputBtn" id="btnAnswer" data-augmented-ui="bl-clip">Verstuur</button>
+                    <button class="inputBtn" id="btnVoice" data-augmented-ui="tr-clip br-clip">Opnemen</button>
+                    <button class="inputBtn" id="btnPause" data-augmented-ui="tr-clip bl-clip">Pause</button>
+                    <button class="inputBtn" id="btnPlay" data-augmented-ui="tl-clip">Play</button>
+                </form>
+            </div>
         </div>
     </div>
     <%- include ("./partials/footer.ejs") %>

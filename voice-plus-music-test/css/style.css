@@ -101,7 +101,8 @@ ul {
     padding: .2em;
     list-style-type: none;
     position: fixed;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     bottom: 0;
     margin: 0;
     top: 0;
@@ -194,21 +195,9 @@ li.you p.text_meta::after {
 
 /* MESSAGE INPUT */
 
-div.send_message_wrapper {
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    height: 170px;
-    background: linear-gradient(0deg, rgba(251, 255, 40, 1) 0%, rgba(251, 255, 40, 0) 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
 div.send_message {
     position: fixed;
-    background: var(--lightpurple);
+    background: var(--neonyellow);
     width: 100%;
     bottom: 0;
     height: 70px;
@@ -232,50 +221,65 @@ div.send_message {
     border: none;
 }
 
-#btnAnswer {
-    background-color: var(--lightpurple);
-}
-
-#pauseWrapper {
-    background-color: var(--lightpurple);
-}
-
-#btnVoice {
-    background-color: var(--darkpurple);
-}
-
-#btnPause {
-    margin-top: 5px;
+#talk {
     border: none;
+    width: 10rem;
+    height: 3.4rem;
     cursor: pointer;
-    background-color: var(--darkpurple);
+    background: #a1a30c;
 }
 
-#btnPause:before {
-    content: url('../img/pause.svg');
-    width: 15px;
-    float: left;
-    margin-right: 5px;
+#talk:before {
+    background-image: url(../img/microphone.svg);
+    background-size: 40px 30px;
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    content: "";
 }
 
-#btnPlay {
-    margin-top: 5px;
+#pause {
     border: none;
+    width: 10rem;
+    height: 3.4rem;
     cursor: pointer;
-    background-color: var(--neongreen);
+    background: #a1a30c;
 }
 
-#btnPlay:before {
-    content: url('../img/play.svg');
-    width: 15px;
-    float: left;
-    margin-right: 5px;
+#pause:before {
+    background-image: url('../img/pause.svg');
+    background-size: 40px 30px;
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    content: "";
+}
+
+#play {
+    border: none;
+    width: 10rem;
+    height: 3.4rem;
+    cursor: pointer;
+    background: #a1a30c;
+}
+
+#play:before {
+    background-image: url('../img/play.svg');
+    background-size: 40px 30px;
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    content: "";
 }
 
 #buttonWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.inactive {
+    display: none;
 }
 
 

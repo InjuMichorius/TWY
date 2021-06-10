@@ -1,4 +1,8 @@
-export function setupBeat(randomEight, randomThirteen, randomFive, kickPattern, snarePattern, hihitPattern, randomKickPattern, randomSnarePattern, beatsPerMinute) {
+let kickBeat = null
+let snareBeat = null
+let hihatBeat = null
+
+export function setupBeat(randomEight, randomThirteen, randomFive, randomKickPattern, randomSnarePattern, beatsPerMinute) {
     blip.sampleLoader()
         .samples({
             'kick': `./sounds/kick${randomEight}.wav`,
@@ -10,13 +14,13 @@ export function setupBeat(randomEight, randomThirteen, randomFive, kickPattern, 
 
     function loaded() {
 
-        console.log("Samples are now loaded");
+        console.log("Samples are now loaded")
 
-        var kick = blip.clip().sample('kick');
-        var snare = blip.clip().sample('snare');
-        var hihat = blip.clip().sample('hihat');
+        var kick = blip.clip().sample('kick')
+        var snare = blip.clip().sample('snare')
+        var hihat = blip.clip().sample('hihat')
 
-        kickPattern = blip.loop()
+        kickBeat = blip.loop()
             .tempo(beatsPerMinute)
             .data(randomKickPattern)
             .tick(function (t, d) {
@@ -25,7 +29,7 @@ export function setupBeat(randomEight, randomThirteen, randomFive, kickPattern, 
                 }
             });
 
-        snarePattern = blip.loop()
+        snareBeat = blip.loop()
             .tempo(beatsPerMinute)
             .data(randomSnarePattern)
             .tick(function (t, d) {
@@ -34,15 +38,39 @@ export function setupBeat(randomEight, randomThirteen, randomFive, kickPattern, 
                 }
             });
 
-        hihitPattern = blip.loop()
+        hihatBeat = blip.loop()
             .tempo(beatsPerMinute)
             .tick(function (t) {
                 hihat.play(t)
             });
 
-        kickPattern.start()
-        snarePattern.start()
-        hihitPattern.start()
+        kickBeat.start()
+        snareBeat.start()
+        hihatBeat.start()
 
+    }
+}
+
+export function stopBeat() {
+    if (kickBeat !== null) {
+        kickBeat.stop()
+    }
+    if (snareBeat !== null) {
+        snareBeat.stop()
+    }
+    if (hihatBeat !== null) {
+        hihatBeat.stop()
+    }
+}
+
+export function startBeat() {
+    if (!kickBeat !== null) {
+        kickBeat.start()
+    }
+    if (!snareBeat !== null) {
+        snareBeat.start()
+    }
+    if (!hihatBeat !== null) {
+        hihatBeat.start()
     }
 }

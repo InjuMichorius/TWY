@@ -1,21 +1,19 @@
-import { setupBeat } from './modules/beat.js'
-import { setupMelody } from './modules/melody.js'
+import { setupBeat, stopBeat, startBeat } from './modules/beat.js'
+import { setupMelody, stopMelody, startMelody } from './modules/melody.js'
 
 const speechButton = document.getElementById('talk')
 const chatBox = document.querySelector('.chat_messages')
-let newMessage = document.createElement('li')
-let userResponse = document.createElement('p')
-let text;
+const playButton = document.getElementById('play')
+const pauseButton = document.getElementById('pause')
+let newMessage
+let userResponse
+let text
 
 var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 var recognition = new SpeechRecognition()
-recognition.interimResults = true;
+recognition.interimResults = true
 
-let sequenceOne
 let bpm = 150
-let kickBeat = null
-let snareBeat = null
-let hihatBeat = null
 
 const kickPatterns = [
     [0, 1, 0, 0, 0, 1, 0, 0],
@@ -37,15 +35,17 @@ let underEight = Math.floor(Math.random() * 8) + 1;
 let underThirteen = Math.floor(Math.random() * 13) + 1;
 let underFive = Math.floor(Math.random() * 5) + 1;
 
-const play = document.getElementById('play')
-const pause = document.getElementById('pause')
-
 speechButton.addEventListener('click', () => {
+
     talk()
     console.log('click')
 
+    newMessage = document.createElement('li')
+
     newMessage.classList.add('message')
     newMessage.classList.add('you')
+
+    userResponse = document.createElement('p')
 
     let userMeta = document.createElement('p')
     userMeta.classList.add('text_meta')
@@ -53,6 +53,8 @@ speechButton.addEventListener('click', () => {
 
     newMessage.appendChild(userMeta)
     chatBox.appendChild(newMessage)
+
+    chatBox.scrollTop = chatBox.scrollHeight
 })
 
 recognition.addEventListener('result', (e) => {
@@ -61,12 +63,14 @@ recognition.addEventListener('result', (e) => {
         .map(result => result.transcript)
         .join('')
 
-    userResponse.innerText = text;
+    userResponse.innerText = text
     newMessage.appendChild(userResponse)
 
     if (e.results[0].isFinal) {
         userResponse = document.createElement('p')
     }
+
+    chatBox.scrollTop = chatBox.scrollHeight
 })
 
 recognition.addEventListener('end', (e) => {
@@ -76,28 +80,28 @@ recognition.addEventListener('end', (e) => {
         const reply = 'Wat vind je van deze sicke beat? Moet het tempo aangepast nog aangepast denk je? Anders gaan we verder met een melodie'
         twyResponseMessage(reply)
 
-        setupBeat(underEight, underThirteen, underFive, kickBeat, snareBeat, hihatBeat, randomKick, randomSnare, bpm)
+        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
 
     } else if (lowerText.search('langzaam') >= 0 || lowerText.search('langzamer') >= 0 || lowerText.search('rustiger') >= 0) {
         const reply = `Oke je wilt het dus ${lowerText}. Komt voor elkaar!`
         twyResponseMessage(reply)
 
         bpm = bpm - 30
-        setupBeat(underEight, underThirteen, underFive, kickBeat, snareBeat, hihatBeat, randomKick, randomSnare, bpm)
+        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
 
     } else if (lowerText.search('snel') >= 0 || lowerText.search('sneller') >= 0 || lowerText.search('faster') >= 0) {
         const reply = `Oke je wilt het dus ${lowerText}. Komt voor elkaar!`
         twyResponseMessage(reply)
 
         bpm = bpm + 30
-        setupBeat(underEight, underThirteen, underFive, kickBeat, snareBeat, hihatBeat, randomKick, randomSnare, bpm)
+        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
 
     } else if (lowerText.search('melodie') >= 0 || lowerText.search('melody') >= 0) {
         const reply = 'Nice, laten we het wat opfleuren met meer geluid!'
         twyResponseMessage(reply)
 
-        setupBeat(underEight, underThirteen, underFive, kickBeat, snareBeat, hihatBeat, randomKick, randomSnare, bpm)
-        setupMelody(sequenceOne, bpm)
+        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+        setupMelody(bpm)
 
     } else {
         const reply = 'Ik snap er geen kut van'
@@ -105,8 +109,8 @@ recognition.addEventListener('end', (e) => {
     }
 })
 
-// pause.addEventListener('click', pauseButton)
-// play.addEventListener('click', playButton)
+playButton.addEventListener('click', play)
+pauseButton.addEventListener('click', pause)
 
 function twyResponseMessage(response) {
     let twyMessage = document.createElement('li')
@@ -118,51 +122,33 @@ function twyResponseMessage(response) {
     twyResponse.classList.add('text')
     twyMeta.innerText = 'TWY'
     twyResponse.innerText = response
-
     twyMessage.appendChild(twyMeta)
     twyMessage.appendChild(twyResponse)
     chatBox.appendChild(twyMessage)
+
+    chatBox.scrollTop = chatBox.scrollHeight
 }
 
 function talk() {
     console.log("Speech enabled")
+    stopBeat()
+    stopMelody()
     recognition.start()
+}
+
+function pause() {
+    console.log('click')
     stopBeat()
+    stopMelody()
+    playButton.classList.remove('inactive')
+    pauseButton.classList.add('inactive')
 }
 
-// NOTE TO SELF, FIX PAUSE AND PLAY BUTTONS
-function pauseButton() {
-    stopBeat()
-    stopMelody(sequenceOne)
-}
+function play() {
+    console.log('click')
+    startBeat()
+    startMelody()
+    pauseButton.classList.remove('inactive')
+    playButton.classList.add('inactive')
 
-function playButton() {
-    if (!kickBeat !== null) {
-        kickBeat.start()
-    }
-    if (!snareBeat !== null) {
-        snareBeat.start()
-    }
-    if (!hihatBeat !== null) {
-        hihatBeat.start()
-    }
-    setupMelody()
-    console.log('Hello world')
-}
-
-function stopBeat() {
-    if (kickBeat !== null) {
-        kickBeat.stop()
-    }
-    if (snareBeat !== null) {
-        snareBeat.stop()
-    }
-    if (hihatBeat !== null) {
-        hihatBeat.stop()
-    }
-}
-
-function stopMelody(sequence) {
-    Tone.Transport.stop()
-    sequence.stop()
 }

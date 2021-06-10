@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/augmented-ui@2/augmented-ui.min.css">
-    <title> TWY</title>
+    <link rel="shortcut icon" type="image/png" href="/img/music-notes.png" />
+    <title>TWY - Thunderboom Records</title>
 </head>
 
 <body>
@@ -37,12 +38,14 @@
                     </li>
                 </ul>
             </div>
-            <div class="send_message">
+            <div class="send_message" data-augmented-ui="
+            tl-rect-x t-clip-x tr-2-clip-x">
                 <!-- <input id="textInput" type="text" data-augmented-ui="bl-clip br-clip" placeholder="Tekst">
                         <button class="inputBtn" id="btnAnswer" data-augmented-ui="bl-clip">Verstuur</button> -->
                 <div id="voiceWrapper">
-                    <button id="talk">Speech</button>
-                    <p id="speechRec"></p>
+                    <button class="inputBtn" id="talk"></button>
+                    <button class="inputBtn inactive" id="play"></button>
+                    <button class="inputBtn" id="pause"></button>
                 </div>
                 <!-- <button class="inputBtn" id="btnPlay" data-augmented-ui="tl-clip">Play</button> -->
             </div>

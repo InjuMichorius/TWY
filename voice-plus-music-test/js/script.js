@@ -13,7 +13,7 @@ var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
 var recognition = new SpeechRecognition()
 recognition.interimResults = true
 
-let bpm = 150
+let bpm = 100
 
 const kickPatterns = [
     [0, 1, 0, 0, 0, 1, 0, 0],
@@ -104,7 +104,7 @@ recognition.addEventListener('end', (e) => {
         setupMelody(bpm)
 
     } else {
-        const reply = 'Ik snap er geen kut van'
+        const reply = 'Huh ik snap niet wat je bedoelt :(. Misschien moet je wat anders zeggen'
         twyResponseMessage(reply)
     }
 })

@@ -1,77 +1,154 @@
+import { setupBeat, stopBeat, startBeat } from './modules/beat.js'
+import { setupMelody, stopMelody, startMelody } from './modules/melody.js'
 
+const speechButton = document.getElementById('talk')
+const chatBox = document.querySelector('.chat_messages')
+const playButton = document.getElementById('play')
+const pauseButton = document.getElementById('pause')
+let newMessage
+let userResponse
+let text
 
-/*
-  *** FILTEREN EN SORTEREN VAN DE PROJECTEN ***
-  Filteren van de projecten: https://listjs.com/docs/
+var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+var recognition = new SpeechRecognition()
+recognition.interimResults = true
 
-*/
+let bpm = 100
 
+const kickPatterns = [
+    [0, 1, 0, 0, 0, 1, 0, 0],
+    [0, 1, 0, 0, 1, 1, 0, 0],
+    [1, 1, 0, 0, 1, 1, 0, 0],
+    [0, 1, 0, 0, 0, 1, 1, 0]
+]
 
+const snarePatterns = [
+    [0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 1, 1, 0, 0, 1],
+    [0, 0, 0, 1, 1, 0, 0, 1]
+]
 
+let randomKick = kickPatterns[Math.floor(Math.random() * kickPatterns.length)]
+let randomSnare = snarePatterns[Math.floor(Math.random() * snarePatterns.length)]
 
+let underEight = Math.floor(Math.random() * 8) + 1;
+let underThirteen = Math.floor(Math.random() * 13) + 1;
+let underFive = Math.floor(Math.random() * 5) + 1;
 
-/*
-  *** HASH ***
-  In het menu staan 3 knoppen,
-  die verwijzen met een hash naar bijhorende artikelen.
-  Het tweede menu krijgt een highlight als er op is geklikt.
-*/
+speechButton.addEventListener('click', () => {
 
-const knoppen = document.querySelectorAll("main nav a");
-// const nav = document.querySelector("main nav");
+    talk()
+    console.log('click')
 
-window.addEventListener('hashchange', function(){
-    // console.log('The hash has changed!', location.hash);
-  clear_selected();
-  set_selected();
-});
+    newMessage = document.createElement('li')
 
-function set_selected(){
-  var nav = document.querySelector("main nav a[href='"+location.hash+"']");
-  nav.classList.add("selected");
+    newMessage.classList.add('message')
+    newMessage.classList.add('you')
+
+    userResponse = document.createElement('p')
+
+    let userMeta = document.createElement('p')
+    userMeta.classList.add('text_meta')
+    userMeta.innerText = 'You'
+
+    newMessage.appendChild(userMeta)
+    chatBox.appendChild(newMessage)
+
+    chatBox.scrollTop = chatBox.scrollHeight
+})
+
+recognition.addEventListener('result', (e) => {
+    text = Array.from(e.results)
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('')
+
+    userResponse.innerText = text
+    newMessage.appendChild(userResponse)
+
+    if (e.results[0].isFinal) {
+        userResponse = document.createElement('p')
+    }
+
+    chatBox.scrollTop = chatBox.scrollHeight
+})
+
+recognition.addEventListener('end', (e) => {
+    let lowerText = text.toLowerCase()
+
+    if (lowerText.search('random') >= 0 || lowerText.search('doe maar wat') >= 0 || lowerText.search('geef me een beat') >= 0) {
+        const reply = 'Wat vind je van deze sicke beat? Moet het tempo aangepast nog aangepast denk je? Anders gaan we verder met een melodie'
+        twyResponseMessage(reply)
+
+        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+
+    } else if (lowerText.search('langzaam') >= 0 || lowerText.search('langzamer') >= 0 || lowerText.search('rustiger') >= 0) {
+        const reply = `Oke je wilt het dus ${lowerText}. Komt voor elkaar!`
+        twyResponseMessage(reply)
+
+        bpm = bpm - 30
+        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+
+    } else if (lowerText.search('snel') >= 0 || lowerText.search('sneller') >= 0 || lowerText.search('faster') >= 0) {
+        const reply = `Oke je wilt het dus ${lowerText}. Komt voor elkaar!`
+        twyResponseMessage(reply)
+
+        bpm = bpm + 30
+        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+
+    } else if (lowerText.search('melodie') >= 0 || lowerText.search('melody') >= 0) {
+        const reply = 'Nice, laten we het wat opfleuren met meer geluid!'
+        twyResponseMessage(reply)
+
+        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+        setupMelody(bpm)
+
+    } else {
+        const reply = 'Huh ik snap niet wat je bedoelt :(. Misschien moet je wat anders zeggen'
+        twyResponseMessage(reply)
+    }
+})
+
+playButton.addEventListener('click', play)
+pauseButton.addEventListener('click', pause)
+
+function twyResponseMessage(response) {
+    let twyMessage = document.createElement('li')
+    let twyMeta = document.createElement('p')
+    let twyResponse = document.createElement('p')
+    twyMessage.classList.add('message')
+    twyMessage.classList.add('twy')
+    twyMeta.classList.add('text_meta')
+    twyResponse.classList.add('text')
+    twyMeta.innerText = 'TWY'
+    twyResponse.innerText = response
+    twyMessage.appendChild(twyMeta)
+    twyMessage.appendChild(twyResponse)
+    chatBox.appendChild(twyMessage)
+
+    chatBox.scrollTop = chatBox.scrollHeight
 }
-function clear_selected(){
-  knoppen.forEach(function(knop){
-    knop.classList.remove("selected");
-  })
+
+function talk() {
+    console.log("Speech enabled")
+    stopBeat()
+    stopMelody()
+    recognition.start()
 }
-if(location.hash) set_selected(); //init
 
+function pause() {
+    console.log('click')
+    stopBeat()
+    stopMelody()
+    playButton.classList.remove('inactive')
+    pauseButton.classList.add('inactive')
+}
 
-/*
-  *** INTERSECTION OBSERVER ***
-  Als er wordt gescrollt,
-  krijgt het menu een highlight van het betreffende onderdeel
+function play() {
+    console.log('click')
+    startBeat()
+    startMelody()
+    pauseButton.classList.remove('inactive')
+    playButton.classList.add('inactive')
 
-  MDN https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
-  https://alligator.io/js/intersection-observer
-*/
-
-// const programma = document.querySelector('#programma');
-// const projecten = document.querySelector('#projecten');
-// const about = document.querySelector('#about');
-
-observer = new IntersectionObserver(entries => {
-  // console.log(entries[0].target.id);
-  // console.log(entries[0].intersectionRatio);
-  //location.hash = entries[0].target.id;
-  if (entries[0].intersectionRatio < 0.01) {
-    console.log(entries[0],'in the view');
-  } else {
-    console.log('else');
-  }
-  // if (entries[0].isIntersecting) {
-  //   console.log(entries[0],'isIntersecting');
-  // } else {
-  //   console.log(entries[0],'else');
-  // }
-
-});
-
-// const articles = document.querySelectorAll('main > article');
-// articles.forEach(article => {
-//   observer.observe(article);
-// });
-
-const projecten = document.querySelector('#projecten');
-observer.observe(projecten);
+}

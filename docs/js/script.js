@@ -13,7 +13,7 @@ var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
 var recognition = new SpeechRecognition()
 recognition.interimResults = true
 
-let bpm = 100
+let bpm = 150
 
 const kickPatterns = [
     [0, 1, 0, 0, 0, 1, 0, 0],

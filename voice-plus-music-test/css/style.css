@@ -24,13 +24,13 @@
 }
 
 html {
-	background: white;
+	background: #131313;
 }
 
 body {
 	font-family: 'Jura', sans-serif;
 	/* background: #f6e9f0 url('../img/background.jpg'); */
-	background: white;
+	background: #131313;
 	background-repeat: no-repeat;
 }
 
@@ -45,7 +45,6 @@ header {
 	height: 100vh;
 	/* max-height: 736px; */
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	position: relative;
@@ -71,10 +70,64 @@ input:focus {
 	background-position: center;
 	background-image: url('../img/twy.png'),
 		linear-gradient(0deg, rgba(0, 0, 0, 0) -50%, rgba(0, 0, 0, 1) 75%);
-	transition: box-shadow 50ms ease-in-out;
-	animation-name: picture;
-	animation-duration: 0.7s;
+	/* animation-duration: 0.7s;
 	animation-iteration-count: infinite;
+	animation-name: picture; */
+}
+
+.default {
+	/* transition: box-shadow 50ms ease-in-out; */
+	animation-iteration-count: infinite;
+	animation-name: rainbow;
+	animation-duration: 3s;
+}
+
+@keyframes wrong {
+	0% {
+		box-shadow: inset 0 -60px 60px -30px red;
+	}
+	25% {
+		box-shadow: inset 0 -80px 60px -30px crimson;
+	}
+	50% {
+		box-shadow: inset 0 -40px 60px -30px red;
+	}
+	75% {
+		box-shadow: inset 0 -80px 60px -30px crimson;
+	}
+	100% {
+		box-shadow: inset 0 -60px 60px -30px red;
+	}
+}
+
+@keyframes rainbow {
+	0% {
+		box-shadow: inset 0 -60px 60px -30px red;
+	}
+	12.5% {
+		box-shadow: inset 0 -80px 60px -30px violet;
+	}
+	25% {
+		box-shadow: inset 0 -40px 60px -30px indigo;
+	}
+	37.5% {
+		box-shadow: inset 0 -80px 60px -30px blue;
+	}
+	50% {
+		box-shadow: inset 0 -60px 60px -30px green;
+	}
+	62.5% {
+		box-shadow: inset 0 -80px 60px -30px lightgreen;
+	}
+	75% {
+		box-shadow: inset 0 -40px 60px -30px yellow;
+	}
+	87.5% {
+		box-shadow: inset 0 -80px 60px -30px orange;
+	}
+	100% {
+		box-shadow: inset 0 -60px 60px -30px red;
+	}
 }
 
 #pfp {
@@ -263,6 +316,11 @@ div.send_message {
 	content: '';
 }
 
+#pause:disabled {
+	filter: opacity(0.5);
+	background: #969696;
+}
+
 #play {
 	border: none;
 	width: 10rem;
@@ -305,11 +363,10 @@ div.send_message {
 	height: 0.6rem;
 	width: 100%;
 	left: 0;
-	transition: box-shadow 1s ease-in-out;
-	transform-origin: bottom;
-	animation-name: blade;
-	animation-duration: 0.7s;
+	/* transition: box-shadow 50ms ease-in-out; */
 	animation-iteration-count: infinite;
+	animation-name: blade;
+	animation-duration: 3s;
 }
 
 .blade::after {
@@ -336,62 +393,74 @@ div.send_message {
 
 @keyframes blade {
 	0% {
-		box-shadow: inset 0 0 4px hsl(176deg 70% 50%),
-			0 0 1em hsla(176deg 70% 50% / 80%),
-			0 0 1.5em hsla(176deg 70% 50% / 70%),
-			0 0 2em hsla(176deg 70% 50% / 50%),
-			0 0 3em hsla(176deg 70% 50% / 30%),
-			0 0 5em hsla(176deg 70% 50% / 20%);
+		box-shadow: inset 0 0 4px hsl(0deg 100% 50%),
+			0 0 1em hsla(0deg 100% 50% / 80%),
+			0 0 1.5em hsla(0deg 100% 50% / 70%),
+			0 0 2em hsla(0deg 100% 50% / 50%), 0 0 3em hsla(0deg 100% 50% / 30%),
+			0 0 5em hsla(0deg 100% 50% / 20%);
+	}
+	12.5% {
+		box-shadow: inset 0 0 4px hsl(300deg 76% 72%),
+			0 0 1em hsla(300deg 76% 72% / 80%),
+			0 0 1.5em hsla(300deg 76% 72% / 70%),
+			0 0 2em hsla(300deg 76% 72% / 50%),
+			0 0 3em hsla(300deg 76% 72% / 30%),
+			0 0 5em hsla(300deg 76% 72% / 20%);
 	}
 	25% {
-		box-shadow: inset 0 0 4px hsl(79deg 100% 64%),
-			0 0 1em hsla(79deg 100% 64% / 80%),
-			0 0 1.5em hsla(79deg 100% 64% / 70%),
-			0 0 2em hsla(79deg 100% 64% / 50%),
-			0 0 3em hsla(79deg 100% 64% / 30%),
-			0 0 5em hsla(79deg 100% 64% / 20%);
+		box-shadow: inset 0 0 4px hsl(275deg 100% 25%),
+			0 0 1em hsla(275deg 100% 25% / 80%),
+			0 0 1.5em hsla(275deg 100% 25% / 70%),
+			0 0 2em hsla(275deg 100% 25% / 50%),
+			0 0 3em hsla(275deg 100% 25% / 30%),
+			0 0 5em hsla(275deg 100% 25% / 20%);
+	}
+	37.5% {
+		box-shadow: inset 0 0 4px hsl(240deg 100% 50%),
+			0 0 1em hsla(240deg 100% 50% / 80%),
+			0 0 1.5em hsla(240deg 100% 50% / 70%),
+			0 0 2em hsla(240deg 100% 50% / 50%),
+			0 0 3em hsla(240deg 100% 50% / 30%),
+			0 0 5em hsla(240deg 100% 50% / 20%);
 	}
 	50% {
-		box-shadow: inset 0 0 4px hsl(273deg 75% 81%),
-			0 0 1em hsla(273deg 75% 81% / 80%),
-			0 0 1.5em hsla(273deg 75% 81% / 70%),
-			0 0 2em hsla(273deg 75% 81% / 50%),
-			0 0 3em hsla(273deg 75% 81% / 30%),
-			0 0 5em hsla(273deg 75% 81% / 20%);
+		box-shadow: inset 0 0 4px hsl(120deg 100% 25%),
+			0 0 1em hsla(120deg 100% 25% / 80%),
+			0 0 1.5em hsla(120deg 100% 25% / 70%),
+			0 0 2em hsla(120deg 100% 25% / 50%),
+			0 0 3em hsla(120deg 100% 25% / 30%),
+			0 0 5em hsla(120deg 100% 25% / 20%);
+	}
+	62.5% {
+		box-shadow: inset 0 0 4px hsl(120deg 73% 75%),
+			0 0 1em hsla(120deg 73% 75% / 80%),
+			0 0 1.5em hsla(120deg 73% 75% / 70%),
+			0 0 2em hsla(120deg 73% 75% / 50%),
+			0 0 3em hsla(120deg 73% 75% / 30%),
+			0 0 5em hsla(120deg 73% 75% / 20%);
 	}
 	75% {
-		box-shadow: inset 0 0 4px hsl(61deg 100% 58%),
-			0 0 1em hsla(61deg 100% 58% / 80%),
-			0 0 1.5em hsla(61deg 100% 58% / 70%),
-			0 0 2em hsla(61deg 100% 58% / 50%),
-			0 0 3em hsla(61deg 100% 58% / 30%),
-			0 0 5em hsla(61deg 100% 58% / 20%);
+		box-shadow: inset 0 0 4px hsl(60deg 100% 50%),
+			0 0 1em hsla(60deg 100% 50% / 80%),
+			0 0 1.5em hsla(60deg 100% 50% / 70%),
+			0 0 2em hsla(60deg 100% 50% / 50%),
+			0 0 3em hsla(60deg 100% 50% / 30%),
+			0 0 5em hsla(60deg 100% 50% / 20%);
+	}
+	87.5% {
+		box-shadow: inset 0 0 4px hsl(39deg 100% 50%),
+			0 0 1em hsla(39deg 100% 50% / 80%),
+			0 0 1.5em hsla(39deg 100% 50% / 70%),
+			0 0 2em hsla(39deg 100% 50% / 50%),
+			0 0 3em hsla(39deg 100% 50% / 30%),
+			0 0 5em hsla(39deg 100% 50% / 20%);
 	}
 	100% {
-		box-shadow: inset 0 0 4px hsl(176deg 70% 50%),
-			0 0 1em hsla(176deg 70% 50% / 80%),
-			0 0 1.5em hsla(176deg 70% 50% / 70%),
-			0 0 2em hsla(176deg 70% 50% / 50%),
-			0 0 3em hsla(176deg 70% 50% / 30%),
-			0 0 5em hsla(176deg 70% 50% / 20%);
-	}
-}
-
-@keyframes picture {
-	0% {
-		box-shadow: inset 0 -60px 60px -30px hsl(176deg 70% 50%);
-	}
-	25% {
-		box-shadow: inset 0 -80px 60px -30px hsl(79deg 100% 64%);
-	}
-	50% {
-		box-shadow: inset 0 -40px 60px -30px hsl(273deg 75% 81%);
-	}
-	75% {
-		box-shadow: inset 0 -80px 60px -30px hsl(61deg 100% 58%);
-	}
-	100% {
-		box-shadow: inset 0 -60px 60px -30px hsl(176deg 70% 50%);
+		box-shadow: inset 0 0 4px hsl(0deg 100% 50%),
+			0 0 1em hsla(0deg 100% 50% / 80%),
+			0 0 1.5em hsla(0deg 100% 50% / 70%),
+			0 0 2em hsla(0deg 100% 50% / 50%), 0 0 3em hsla(0deg 100% 50% / 30%),
+			0 0 5em hsla(0deg 100% 50% / 20%);
 	}
 }
 
@@ -404,19 +473,3 @@ div.send_message {
 		margin: 0 auto;
 	}
 }
-
-/* Blauw HSL = hsl(176deg 70% 50%) */
-
-/* Groen HSL = hsl(176deg 70% 50%) */
-
-/* Lightpurple HSL = hsl(273deg 75% 81%) */
-
-/* Geel HSL = hsl(61deg 100% 58%) */
-
-/* Blauw RGBA = rgba(38, 217, 205, 1) */
-
-/* Blauw RGBA = rgba(197, 255, 71, 1) */
-
-/* Lightpurple RGBA = rgba(210, 170, 243, 1) */
-
-/* Geel RGBA = rgba(251, 255, 40, 1) */

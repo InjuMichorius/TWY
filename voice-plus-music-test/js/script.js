@@ -1,5 +1,6 @@
 import { setupBeat, stopBeat, startBeat } from './modules/beat.js'
 import { setupMelody, stopMelody, startMelody } from './modules/melody.js'
+import { setupEffect, lowerVolume } from './modules/effects.js'
 
 const speechButton = document.getElementById('talk')
 const chatBox = document.querySelector('.chat_messages')
@@ -9,9 +10,15 @@ let newMessage
 let userResponse
 let text
 
+let melodyPlayed = false;
+
 var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 var recognition = new SpeechRecognition()
 recognition.interimResults = true
+
+const lighting = document.querySelector('.twy-image')
+lighting.classList.add('default')
+    // lighting.style.display = "none"
 
 let bpm = 150
 
@@ -31,14 +38,18 @@ const snarePatterns = [
 let randomKick = kickPatterns[Math.floor(Math.random() * kickPatterns.length)]
 let randomSnare = snarePatterns[Math.floor(Math.random() * snarePatterns.length)]
 
-let underEight = Math.floor(Math.random() * 8) + 1;
-let underThirteen = Math.floor(Math.random() * 13) + 1;
-let underFive = Math.floor(Math.random() * 5) + 1;
+let underEight = Math.floor(Math.random() * 8) + 1
+let underThirteen = Math.floor(Math.random() * 13) + 1
+let underFive = Math.floor(Math.random() * 5) + 1
 
 speechButton.addEventListener('click', () => {
 
     talk()
     console.log('click')
+
+    pauseButton.disabled = false;
+    pauseButton.classList.remove('inactive')
+    playButton.classList.add('inactive')
 
     newMessage = document.createElement('li')
 
@@ -82,12 +93,17 @@ recognition.addEventListener('end', (e) => {
 
         setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
 
+
     } else if (lowerText.search('langzaam') >= 0 || lowerText.search('langzamer') >= 0 || lowerText.search('rustiger') >= 0) {
         const reply = `Oke je wilt het dus ${lowerText}. Komt voor elkaar!`
         twyResponseMessage(reply)
 
         bpm = bpm - 30
         setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+
+        if (melodyPlayed == true) {
+            setupMelody(bpm)
+        }
 
     } else if (lowerText.search('snel') >= 0 || lowerText.search('sneller') >= 0 || lowerText.search('faster') >= 0) {
         const reply = `Oke je wilt het dus ${lowerText}. Komt voor elkaar!`
@@ -96,12 +112,37 @@ recognition.addEventListener('end', (e) => {
         bpm = bpm + 30
         setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
 
+        if (melodyPlayed == true) {
+            setupMelody(bpm)
+        }
+
     } else if (lowerText.search('melodie') >= 0 || lowerText.search('melody') >= 0) {
-        const reply = 'Nice, laten we het wat opfleuren met meer geluid!'
+        const reply = 'Nice, laten we het wat opfleuren met meer geluid! Wat dacht je hiervan?'
         twyResponseMessage(reply)
 
         setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
         setupMelody(bpm)
+        melodyPlayed = true
+
+    } else if (lowerText.search('effect') >= 0) {
+        const reply = 'Nu word het pas echt vet! De muziek kan raar gaan klinken'
+        twyResponseMessage(reply)
+
+        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+        if (melodyPlayed == true) {
+            setupMelody(bpm)
+            setupEffect()
+        }
+
+    } else if (lowerText.search('zachter') >= 0) {
+        const reply = 'Ik zal de muziek zachter zetten'
+        twyResponseMessage(reply)
+
+        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+        if (melodyPlayed == true) {
+            setupMelody(bpm)
+            lowerVolume()
+        }
 
     } else {
         const reply = 'Huh ik snap niet wat je bedoelt :(. Misschien moet je wat anders zeggen'

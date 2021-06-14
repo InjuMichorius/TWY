@@ -7,10 +7,11 @@ let sequenceOne
 
 // source https://pdm.lsupathways.org/3_audio/2_synthsandmusic/2_lesson_2/buildingasequence/
 export function setupMelody(beatsPerMinute) {
-    let simpSynth = new Tone.Synth({
+
+    let synth = new Tone.Synth({
         oscillator: {
-            volume: 0.1,
-            type: "fatsawtooth"
+            type: "fatsawtooth",
+            volume: -10
         },
         envelope: {
             attack: 0.05,
@@ -21,7 +22,7 @@ export function setupMelody(beatsPerMinute) {
     }).toDestination();
 
     sequenceOne = new Tone.Sequence(function (time, note) {
-        simpSynth.triggerAttackRelease(note, 0.5);
+        synth.triggerAttackRelease(note, 0.5);
         console.log(note);
     }, bgMelody, '4n')
 

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/augmented-ui@2/augmented-ui.min.css">
     <link rel="shortcut icon" type="image/png" href="./img/favicon.png" />
@@ -13,38 +15,49 @@
 
 <body>
     <header>
-        <h1>Chat with TWY</h1>
+        <div class="header-text-container" data-augmented-ui="br-clip-x border">
+            <h1>Make A Song With TWY!</h1>
+        </div>
     </header>
     <main>
+        <div class="grid">
+            <div class="grid-lines">
+            </div>
+        </div>
         <div class="container">
             <div class="twy-image">
             </div>
             <div class="blade"></div>
+
             <div class="chat">
                 <ul class="chat_messages">
-                    <li class="message twy">
+                    <!-- <li class="message twy">
                         <p class="text_meta">
                             TWY
                         </p>
                         <p class="text">
                             <span>
-                                Hey jij daar! Mijn naam is TWY :) Ik hou van muziek maken en ik ben ontzettend beniewd
+                                Hey jij daar! Mijn naam is TWY :) Ik hou van muziek maken en ik ben ontzettend benieuwd
                                 naar de muziek die jullie op
-                                aarde luisteren. Laten we beignnen met een beat, wat voor beat wil je?
+                                aarde luisteren. Laten we beginnen met een beat, wat voor beat wil je?
                             </span>
                         </p>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
+            <div class="message loading">
+                <div class="op-typing">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
             <div class="send_message" data-augmented-ui="tl-clip-y t-clip-x tr-2-clip-x border">
-                <!-- <input id="textInput" type="text" data-augmented-ui="bl-clip br-clip" placeholder="Tekst">
-                        <button class="inputBtn" id="btnAnswer" data-augmented-ui="bl-clip">Verstuur</button> -->
                 <div id="voiceWrapper">
                     <button class="inputBtn" id="talk" data-augmented-ui="tr-clip-x br-clip"></button>
                     <button class="inputBtn inactive" id="play" data-augmented-ui="tl-clip tr-clip"></button>
-                    <button class="inputBtn" id="pause" data-augmented-ui="tl-clip tr-clip"></button>
+                    <button class="inputBtn" id="pause" data-augmented-ui="tl-clip tr-clip" disabled></button>
                 </div>
-                <!-- <button class="inputBtn" id="btnPlay" data-augmented-ui="tl-clip">Play</button> -->
             </div>
         </div>
     </main>

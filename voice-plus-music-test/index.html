@@ -15,16 +15,23 @@
 
 <body>
     <header>
-        <h1>Make A Song With TWY!</h1>
+        <div class="header-text-container" data-augmented-ui="br-clip-x border">
+            <h1>Make A Song With TWY!</h1>
+        </div>
     </header>
     <main>
+        <div class="grid">
+            <div class="grid-lines">
+            </div>
+        </div>
         <div class="container">
             <div class="twy-image">
             </div>
             <div class="blade"></div>
+
             <div class="chat">
                 <ul class="chat_messages">
-                    <li class="message twy">
+                    <!-- <li class="message twy">
                         <p class="text_meta">
                             TWY
                         </p>
@@ -35,8 +42,15 @@
                                 aarde luisteren. Laten we beginnen met een beat, wat voor beat wil je?
                             </span>
                         </p>
-                    </li>
+                    </li> -->
                 </ul>
+            </div>
+            <div class="message loading">
+                <div class="op-typing">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
             </div>
             <div class="send_message" data-augmented-ui="tl-clip-y t-clip-x tr-2-clip-x border">
                 <div id="voiceWrapper">

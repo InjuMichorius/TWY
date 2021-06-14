@@ -1,0 +1,7 @@
+- Effecten aan muziek toevoegen
+- Achtergrond van de pagina stylen
+- Testjes voor bugs
+- Inju's spraak visualisatie toevoegen
+- Header stylen
+- Design Rationale schrijven
+- Reflecteren op het project en leerdoelen

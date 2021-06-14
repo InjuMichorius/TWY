@@ -1,6 +1,8 @@
 let kickBeat = null
 let snareBeat = null
 let hihatBeat = null
+const lighting = document.querySelector('.twy-image')
+const blade = document.querySelector('.blade')
 
 export function setupBeat(randomEight, randomThirteen, randomFive, randomKickPattern, randomSnarePattern, beatsPerMinute) {
     blip.sampleLoader()
@@ -13,6 +15,8 @@ export function setupBeat(randomEight, randomThirteen, randomFive, randomKickPat
         .load();
 
     function loaded() {
+        lighting.classList.add('default')
+        blade.classList.add('defaultBlade')
 
         console.log("Samples are now loaded")
 

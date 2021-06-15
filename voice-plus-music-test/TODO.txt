@@ -3,4 +3,4 @@
 - Testjes voor bugs
 - Inju's spraak visualisatie toevoegen
 - Design Rationale schrijven
-- Reflecteren op het project en leerdoelen
+- Reflecteren op het project en eigen leerdoelen

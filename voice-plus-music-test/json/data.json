@@ -1,0 +1,228 @@
+[
+    {
+        "beat": [
+            {
+                "beat": "beat"
+            },
+            {
+                "beat": "random"
+            },
+            {
+                "beat": "doe maar wat"
+            },
+            {
+                "beat": "ritme"
+            },
+            {
+                "beat": "slag"
+            },
+            {
+                "beat": "slagwerk"
+            },
+            {
+                "beat": "trom"
+            },
+            {
+                "beat": "trommel"
+            },
+            {
+                "beat": "kick"
+            },
+            {
+                "beat": "snare"
+            },
+            {
+                "beat": "hihat"
+            },
+            {
+                "beat": "base"
+            },
+            {
+                "beat": "basedrum"
+            },
+            {
+                "beat": "tom"
+            }
+        ],
+        "melody": [
+            {
+                "synonym": "melodie"
+            },
+            {
+                "synonym": "melodietje"
+            },
+            {
+                "synonym": "lied"
+            },
+            {
+                "synonym": "liedje"
+            },
+            {
+                "synonym": "deun"
+            },
+            {
+                "synonym": "deuntje"
+            },
+            {
+                "synonym": "loop"
+            },
+            {
+                "synonym": "loopje"
+            },
+            {
+                "synonym": "tune"
+            },
+            {
+                "synonym": "wijs"
+            },
+            {
+                "synonym": "wijsje"
+            },
+            {
+                "synonym": "stuk"
+            },
+            {
+                "synonym": "muziekstuk"
+            },
+            {
+                "synonym": "riedel"
+            },
+            {
+                "synonym": "riedeltje"
+            },
+            {
+                "synonym": "klank"
+            },
+            {
+                "synonym": "klankje"
+            },
+            {
+                "synonym": "compositie"
+            }
+        ],
+        "slower": [
+            {
+                "slower": "langzaam"
+            },
+            {
+                "slower": "langzamer"
+            },
+            {
+                "slower": "sloom"
+            },
+            {
+                "slower": "slomer"
+            },
+            {
+                "slower": "slow"
+            },
+            {
+                "slower": "slower"
+            },
+            {
+                "slower": "traag"
+            },
+            {
+                "slower": "trager"
+            },
+            {
+                "slower": "traagzaam"
+            },
+            {
+                "slower": "traagzamer"
+            },
+            {
+                "slower": "treuzelend"
+            },
+            {
+                "slower": "zacht"
+            },
+            {
+                "slower": "zachter"
+            },
+            {
+                "slower": "zachtjes"
+            },
+            {
+                "slower": "kalm"
+            },
+            {
+                "slower": "kalmer"
+            },
+            {
+                "slower": "kalmpjes"
+            },
+            {
+                "slower": "rustig"
+            },
+            {
+                "slower": "rustiger"
+            },
+            {
+                "slower": "lui"
+            },
+            {
+                "slower": "luier"
+            },
+            {
+                "slower": "geleidelijk"
+            },
+            {
+                "slower": "geleidelijker"
+            },
+            {
+                "slower": "saai"
+            },
+            {
+                "slower": "saaier"
+            }
+        ],
+        "faster": [
+            {
+                "faster:": "fast"
+            },
+            {
+                "faster:": "faster"
+            },
+            {
+                "faster:": "speed"
+            },
+            {
+                "faster:": "snel"
+            },
+            {
+                "faster:": "sneller"
+            },
+            {
+                "faster:": "hard"
+            },
+            {
+                "faster:": "harder"
+            },
+            {
+                "faster:": "rap"
+            },
+            {
+                "faster:": "rapper"
+            },
+            {
+                "faster:": "vlug"
+            },
+            {
+                "faster:": "vlugger"
+            },
+            {
+                "faster:": "vlot"
+            },
+            {
+                "faster:": "vlotter"
+            },
+            {
+                "faster:": "gauw"
+            },
+            {
+                "faster:": "gauwer"
+            }
+        ]
+    }
+]

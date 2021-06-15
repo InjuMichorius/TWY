@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 import { setupBeat, stopBeat, startBeat } from './modules/beat.js'
 import { setupMelody, stopMelody, startMelody } from './modules/melody.js'
 import { setupEffect, lowerVolume } from './modules/effects.js'
@@ -50,7 +52,19 @@ const melodies = [
 ]
 
 let randomMelody = melodies[Math.floor(Math.random() * melodies.length)]
-console.log(randomMelody)
+// console.log(randomMelody)
+
+const file = fs.readFileSync('.. /json/data.json', 'utf-8', (err) => {
+    if (err) console.error(err);
+});
+
+const obj = JSON.parse(file)
+
+obj.melody.map(synonym => {
+    if (synonym === lowerText) {
+
+    }
+})
 
 window.addEventListener('load', () => {
     const reply = "Hey jij daar! Mijn naam is TWY :) Ik hou van muziek maken en ik ben ontzettend benieuwd naar de muziek die jullie op aarde luisteren. Laten we beginnen met een beat, wat voor beat wil je?"

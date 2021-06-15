@@ -42,6 +42,16 @@ let underEight = Math.floor(Math.random() * 8) + 1
 let underThirteen = Math.floor(Math.random() * 13) + 1
 let underFive = Math.floor(Math.random() * 5) + 1
 
+const melodies = [
+    ["C3", ["E3", "G3"], "D3", ["C3", "A3"], "B2", "C2", ["E3", "A2"], "G2", "C4"],
+    ["E3", ["D3", "E3", "F3", "E3"], "B4", ["B2", "A2"], "A3", "B3", "C3", "B2"],
+    ["B3", ["G3", "A3"], "E3", null, "E3", "G3", "A3", "A3", "B3"],
+    ["C#4", "D#4", "G#3", "D#4", "F4", ["G#4", "F#4", "F4"], "C#4", "D#4", "G#3", null, null]
+]
+
+let randomMelody = melodies[Math.floor(Math.random() * melodies.length)]
+console.log(randomMelody)
+
 window.addEventListener('load', () => {
     const reply = "Hey jij daar! Mijn naam is TWY :) Ik hou van muziek maken en ik ben ontzettend benieuwd naar de muziek die jullie op aarde luisteren. Laten we beginnen met een beat, wat voor beat wil je?"
     twyResponseMessage(reply)
@@ -109,7 +119,7 @@ recognition.addEventListener('end', (e) => {
             setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
 
             if (melodyPlayed == true) {
-                setupMelody(bpm)
+                setupMelody(randomMelody, bpm)
             }
         }, 1500)
 
@@ -122,7 +132,7 @@ recognition.addEventListener('end', (e) => {
             setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
 
             if (melodyPlayed == true) {
-                setupMelody(bpm)
+                setupMelody(randomMelody, bpm)
             }
         }, 1500)
 
@@ -132,7 +142,7 @@ recognition.addEventListener('end', (e) => {
 
         setTimeout(() => {
             setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-            setupMelody(bpm)
+            setupMelody(randomMelody, bpm)
             melodyPlayed = true
         }, 1500)
 
@@ -143,7 +153,7 @@ recognition.addEventListener('end', (e) => {
         setTimeout(() => {
             setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
             if (melodyPlayed == true) {
-                setupMelody(bpm)
+                setupMelody(randomMelody, bpm)
                 setupEffect()
             }
         }, 1500)
@@ -155,7 +165,7 @@ recognition.addEventListener('end', (e) => {
         setTimeout(() => {
             setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
             if (melodyPlayed == true) {
-                setupMelody(bpm)
+                setupMelody(randomMelody, bpm)
                 lowerVolume()
             }
         }, 1500)

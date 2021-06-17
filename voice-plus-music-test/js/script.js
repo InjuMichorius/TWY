@@ -21,7 +21,7 @@ const beat = ["beat", "doe maar wat", "random", "ritme", "slagwerk", "trommel", 
 const melody = ["melodie", "melody", "lied", "deun", "loop", "tune", "wijs", "muziekstuk", "riedel", "klank", "compositie"]
 const slower = ["langzaam", "sloom", "slomer", "slow", "traag", "trager", "treuzelend", "zacht", "kalm", "rustig", "lui", "geleidelijk", "saai"]
 const faster = ["fast", "speed", "snel", "hard", "rap", "vlug", "vlot", "gauw", "subiet"]
-const effect = ["effect", "effekt", "prefect", "transitie", "trans", "gevolg", "lijp"]
+const effect = ["effect", "effekt", "perfect", "transitie", "gevolg", "lijp"]
 
 const checkIfExists = beat.concat(melody, slower, faster, effect)
 

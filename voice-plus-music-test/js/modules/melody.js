@@ -23,7 +23,7 @@ export function setupMelody(melody, beatsPerMinute) {
 
     sequenceOne = new Tone.Sequence(function (time, note) {
         synth.triggerAttackRelease(note, 0.5);
-        console.log(note);
+        // console.log(note);
     }, melody, '4n')
 
     Tone.Transport.bpm.value = beatsPerMinute

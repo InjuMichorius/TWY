@@ -1,6 +1,6 @@
 import { setupBeat, stopBeat, startBeat } from './modules/beat.js'
 import { setupMelody, stopMelody, startMelody } from './modules/melody.js'
-import { setupEffect, lowerVolume } from './modules/effects.js'
+import { setupEffect } from './modules/effects.js'
 
 const speechButton = document.getElementById('talk')
 const chatBox = document.querySelector('.chat_messages')
@@ -21,7 +21,7 @@ const beat = ["beat", "doe maar wat", "random", "ritme", "slagwerk", "trommel", 
 const melody = ["melodie", "melody", "lied", "deun", "loop", "tune", "wijs", "muziekstuk", "riedel", "klank", "compositie"]
 const slower = ["langzaam", "sloom", "slomer", "slow", "traag", "trager", "treuzelend", "zacht", "kalm", "rustig", "lui", "geleidelijk", "saai"]
 const faster = ["fast", "speed", "snel", "hard", "rap", "vlug", "vlot", "gauw", "subiet"]
-const effect = ["effect", "effekt", "transitie", "trans", "gevolg", "lijp"]
+const effect = ["effect", "effekt", "prefect", "transitie", "trans", "gevolg", "lijp"]
 
 const checkIfExists = beat.concat(melody, slower, faster, effect)
 
@@ -54,7 +54,12 @@ const melodies = [
     ["C3", ["E3", "G3"], "D3", ["C3", "A3"], "B2", "C2", ["E3", "A2"], "G2", "C4"],
     ["E3", ["D3", "E3", "F3", "E3"], "B4", ["B2", "A2"], "A3", "B3", "C3", "B2"],
     ["B3", ["G3", "A3"], "E3", null, "E3", "G3", "A3", "A3", "B3"],
-    ["C#4", "D#4", "G#3", "D#4", "F4", ["G#4", "F#4", "F4"], "C#4", "D#4", "G#3", null, null]
+    ["C#4", "D#4", "G#3", "D#4", "F4", ["G#4", "F#4", "F4"], "C#4", "D#4", "G#3", null, null],
+    ["C3", "D#3", "G3", "G#3", "D#3", "G#3", "A#3", ["G3", "G#3", "G3", "G#3", "G3"]],
+    ["C3", ["G3", "F#3", "G3", "F#3", "G3"], "D#3", "C3"],
+    [
+        ["C4", "B#3", "A3", "F3"], "G3", ["G3", "D4"], "C4", "B#3", "A3", ["A3", "A3"], "C4", ["B#3", "A3"], "G3", ["B#4", "A4", "B#4", "A4", "B#4"]
+    ]
 ]
 
 let randomMelody = melodies[Math.floor(Math.random() * melodies.length)]
@@ -67,8 +72,10 @@ window.addEventListener('load', () => {
 speechButton.addEventListener('click', () => {
 
     talk()
-    console.log(checkIfExists)
-    console.log('click')
+    // console.log(checkIfExists)
+    // console.log('click')
+    lighting.classList.remove('default')
+    blade.classList.remove('defaultBlade')
 
     pauseButton.disabled = false;
     pauseButton.classList.remove('inactive')
@@ -111,79 +118,6 @@ recognition.addEventListener('end', (e) => {
     let lowerText = text.toLowerCase()
 
     compareData(lowerText)
-
-    // if (lowerText.search('random') >= 0 || lowerText.search('doe maar wat') >= 0 || lowerText.search('geef me een beat') >= 0) {
-    //     const reply = 'Wat vind je van deze sicke beat? Moet het tempo aangepast nog aangepast denk je? Anders gaan we verder met een melodie'
-    //     twyResponseMessage(reply)
-
-    //     setTimeout(() => {
-    //         setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-    //     }, 1500)
-
-    // } else if (lowerText.search('langzaam') >= 0 || lowerText.search('langzamer') >= 0 || lowerText.search('rustiger') >= 0) {
-    //     const reply = `Oke je wilt het dus ${lowerText}. Komt voor elkaar!`
-    //     twyResponseMessage(reply)
-
-    //     setTimeout(() => {
-    //         bpm = bpm - 30
-    //         setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-
-    //         if (melodyPlayed == true) {
-    //             setupMelody(randomMelody, bpm)
-    //         }
-    //     }, 1500)
-
-    // } else if (lowerText.search('snel') >= 0 || lowerText.search('sneller') >= 0 || lowerText.search('faster') >= 0) {
-    //     const reply = `Oke je wilt het dus ${lowerText}. Komt voor elkaar!`
-    //     twyResponseMessage(reply)
-
-    //     setTimeout(() => {
-    //         bpm = bpm + 30
-    //         setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-
-    //         if (melodyPlayed == true) {
-    //             setupMelody(randomMelody, bpm)
-    //         }
-    //     }, 1500)
-
-    // } else if (lowerText.search('melodie') >= 0 || lowerText.search('melody') >= 0) {
-    //     const reply = 'Nice, laten we het wat opfleuren met meer geluid! Wat dacht je hiervan?'
-    //     twyResponseMessage(reply)
-
-    //     setTimeout(() => {
-    //         setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-    //         setupMelody(randomMelody, bpm)
-    //         melodyPlayed = true
-    //     }, 1500)
-
-    // } else if (lowerText.search('effect') >= 0) {
-    //     const reply = 'Nu word het pas echt vet! De muziek kan raar gaan klinken'
-    //     twyResponseMessage(reply)
-
-    //     setTimeout(() => {
-    //         setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-    //         if (melodyPlayed == true) {
-    //             setupMelody(randomMelody, bpm)
-    //             setupEffect()
-    //         }
-    //     }, 1500)
-
-    // } else if (lowerText.search('zachter') >= 0) {
-    //     const reply = 'Ik zal de muziek zachter zetten'
-    //     twyResponseMessage(reply)
-
-    //     setTimeout(() => {
-    //         setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-    //         if (melodyPlayed == true) {
-    //             setupMelody(randomMelody, bpm)
-    //             lowerVolume()
-    //         }
-    //     }, 1500)
-
-    // } else {
-    //     const reply = 'Huh ik snap niet wat je bedoelt :(. Misschien moet je wat anders zeggen'
-    //     twyResponseMessage(reply)
-    // }
 })
 
 playButton.addEventListener('click', play)
@@ -247,10 +181,9 @@ function twyResetConversation(response) {
 }
 
 function compareData(speechToText) {
-    // if (checkIfExists.includes(speechToText)) {
     const existsToString = checkIfExists.toString()
 
-    console.log(existsToString)
+    // console.log(existsToString)
 
     if (speechToText.search(existsToString)) {
         beat.filter((item) => {
@@ -322,9 +255,6 @@ function compareData(speechToText) {
                     const endmessage = 'Ik heb alles gedaan om een vette tune voor je te maken. Wil je er nog één maken, druk de knop'
                     twyResetConversation(endmessage)
                 }, 2500)
-
-
-
             }
         })
     } else if (checkIfExists.indexOf(speechToText) >= -1) {
@@ -342,7 +272,6 @@ function talk() {
 }
 
 function pause() {
-    // console.log('click')
     stopBeat()
     stopMelody()
     playButton.classList.remove('inactive')
@@ -354,10 +283,8 @@ function pause() {
 function play() {
     lighting.classList.add('default')
     blade.classList.add('defaultBlade')
-    // console.log('click')
     startBeat()
     startMelody()
     pauseButton.classList.remove('inactive')
     playButton.classList.add('inactive')
-
 }

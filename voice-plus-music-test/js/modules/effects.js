@@ -2,7 +2,7 @@
 
 export function setupEffect() {
     // const oscillator = new Tone.Oscillator().connect(autoFilter).start();
-    const autoPanner = new Tone.AutoPanner("4n")
+    // const autoPanner = new Tone.AutoPanner("4n")
     // const autoFilter = new Tone.AutoFilter("4n")
     // const autoWah = new Tone.AutoWah(50, 6, -30)
     // const crusher = new Tone.BitCrusher(10)
@@ -17,27 +17,15 @@ export function setupEffect() {
     // const reverb = new Tone.JCReverb(1);
     // const delay = new Tone.FeedbackDelay(0.5);
 
-    // const phaser = new Tone.Phaser({
-    //     frequency: 15,
-    //     octaves: 5,
-    //     baseFrequency: 1000
-    // })
+    const phaser = new Tone.Phaser({
+        frequency: 200,
+        octaves: 7,
+        baseFrequency: 800
+    })
 
     // const pingPong = new Tone.PingPongDelay("4n", 0.2).start()
 
     // const tremolo = new Tone.Tremolo(9, 0.75).start()
 
-    const oscillator = new Tone.Oscillator().conncect(autoPanner).start();
-}
-
-export function lowerVolume() {
-    // const vol = new Tone.Volume().toDestination();
-    // const oscillator = new Tone.Oscillator().connect(vol).start();
-    // vol.volume.value = -30
-}
-
-// https://tonejs.github.io/docs/14.7.77/Volume
-
-export function increaseVolume() {
-
+    // const oscillator = new Tone.Oscillator().conncect(reverb).start();
 }

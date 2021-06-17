@@ -18,7 +18,7 @@ export function setupBeat(randomEight, randomThirteen, randomFive, randomKickPat
         lighting.classList.add('default')
         blade.classList.add('defaultBlade')
 
-        console.log("Samples are now loaded")
+        // console.log("Samples are now loaded")
 
         var kick = blip.clip().sample('kick')
         var snare = blip.clip().sample('snare')

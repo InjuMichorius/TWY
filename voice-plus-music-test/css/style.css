@@ -268,9 +268,9 @@ li:last-child {
 
 div.send_message {
     --aug-border-bg: white;
-    position: absolute;
     background: var(--neonyellow);
     width: 100%;
+    position: absolute;
     bottom: 0;
     height: 70px;
     display: flex;
@@ -508,6 +508,14 @@ div.send_message {
 
 .dot:nth-child(3) {
     animation-delay: .3s
+}
+
+.reset {
+    padding: 0.5em;
+    background: #35e6de;
+    color: black;
+    border: none;
+    width: min-content;
 }
 
 @keyframes bounce {

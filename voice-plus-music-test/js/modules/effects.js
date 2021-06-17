@@ -2,7 +2,7 @@
 
 export function setupEffect() {
     // const oscillator = new Tone.Oscillator().connect(autoFilter).start();
-    // const autoPanner = new Tone.AutoPanner("4n")
+    const autoPanner = new Tone.AutoPanner("4n")
     // const autoFilter = new Tone.AutoFilter("4n")
     // const autoWah = new Tone.AutoWah(50, 6, -30)
     // const crusher = new Tone.BitCrusher(10)
@@ -23,11 +23,11 @@ export function setupEffect() {
     //     baseFrequency: 1000
     // })
 
-    const pingPong = new Tone.PingPongDelay("4n", 0.2).start()
+    // const pingPong = new Tone.PingPongDelay("4n", 0.2).start()
 
     // const tremolo = new Tone.Tremolo(9, 0.75).start()
 
-    const oscillator = new Tone.Oscillator().conncect(pingPong).start();
+    const oscillator = new Tone.Oscillator().conncect(autoPanner).start();
 }
 
 export function lowerVolume() {

@@ -46,58 +46,58 @@
         ],
         "melody": [
             {
-                "synonym": "melodie"
+                "melody": "melodie"
             },
             {
-                "synonym": "melodietje"
+                "melody": "melodietje"
             },
             {
-                "synonym": "lied"
+                "melody": "lied"
             },
             {
-                "synonym": "liedje"
+                "melody": "liedje"
             },
             {
-                "synonym": "deun"
+                "melody": "deun"
             },
             {
-                "synonym": "deuntje"
+                "melody": "deuntje"
             },
             {
-                "synonym": "loop"
+                "melody": "loop"
             },
             {
-                "synonym": "loopje"
+                "melody": "loopje"
             },
             {
-                "synonym": "tune"
+                "melody": "tune"
             },
             {
-                "synonym": "wijs"
+                "melody": "wijs"
             },
             {
-                "synonym": "wijsje"
+                "melody": "wijsje"
             },
             {
-                "synonym": "stuk"
+                "melody": "stuk"
             },
             {
-                "synonym": "muziekstuk"
+                "melody": "muziekstuk"
             },
             {
-                "synonym": "riedel"
+                "melody": "riedel"
             },
             {
-                "synonym": "riedeltje"
+                "melody": "riedeltje"
             },
             {
-                "synonym": "klank"
+                "melody": "klank"
             },
             {
-                "synonym": "klankje"
+                "melody": "klankje"
             },
             {
-                "synonym": "compositie"
+                "melody": "compositie"
             }
         ],
         "slower": [

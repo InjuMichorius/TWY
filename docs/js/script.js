@@ -213,7 +213,7 @@ function compareData(speechToText) {
         })
         faster.filter((item) => {
             if (speechToText.includes(item)) {
-                const reply = `Oke je wilt het dus langzamer. Komt voor elkaar!`
+                const reply = `Oke je wilt het dus sneller. Komt voor elkaar!`
                 twyResponseMessage(reply)
 
                 setTimeout(() => {

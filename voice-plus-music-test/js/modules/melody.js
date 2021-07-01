@@ -1,16 +1,14 @@
-// let bgMelody = ["C3", ["E3", "G3"], "D3", ["C3", "A3"], "B2", "C2", ["E3", "A2"], "G2", "C4"];
-// let injuMelody = ["E3", ["D3", "E3", "F3", "E3"], "B4", ["B2", "A2"], "A3", "B3", "C3", "B2"];
-// let injuMelodyTwo = ["B3", ["G3", "A3"], "E3", null, "E3", "G3", "A3", "A3", "B3"];
-// let neverGonnaGive = ["C#4", "D#4", "G#3", "D#4", "F4", ["G#4", "F#4", "F4"], "C#4", "D#4", "G#3", null, null]
+// Source and inspiration for the code: https://pdm.lsupathways.org/3_audio/2_synthsandmusic/2_lesson_2/buildingasequence/
 
-let sequenceOne
-
-// source https://pdm.lsupathways.org/3_audio/2_synthsandmusic/2_lesson_2/buildingasequence/
+// let sequenceOne
+// This function will create and play a melody, it takes in the notes for the melody as an array and the beats per minute as a number
 export function setupMelody(melody, beatsPerMinute) {
 
+    // Setting up the synth and sending it to the destination (which is the output)
     let synth = new Tone.Synth({
+        // Parameters can be changed to change the synth's sound
         oscillator: {
-            type: "fatsawtooth",
+            type: 'fatsawtooth',
             volume: -10
         },
         envelope: {
@@ -19,22 +17,26 @@ export function setupMelody(melody, beatsPerMinute) {
             sustain: 0.5,
             release: 1
         }
-    }).toDestination();
+    }).toDestination()
 
-    sequenceOne = new Tone.Sequence(function (time, note) {
-        synth.triggerAttackRelease(note, 0.5);
-        // console.log(note);
+    // Setting up a sequence, you have to specify the melody which are the notes in an array and the time or speed the melody is played in which in this case is four-four time (4n)
+    let sequenceOne = new Tone.Sequence(function (time, note) {
+        synth.triggerAttackRelease(note, 0.5)
     }, melody, '4n')
 
+    // Sets the bpm by using the external value
     Tone.Transport.bpm.value = beatsPerMinute
+    // Starts the melody and the sequence
     Tone.Transport.start()
     sequenceOne.start()
 }
 
+// Starts the melody when you click the unpause button
 export function startMelody() {
     Tone.Transport.start()
 }
 
+// Stops the melody when you click the pause button
 export function stopMelody() {
     Tone.Transport.stop()
 }

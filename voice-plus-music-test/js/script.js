@@ -60,13 +60,14 @@ const melodies = [
     ]
 ]
 
+// Picks a random array from the bigger array
+const randomMelody = melodies[Math.floor(Math.random() * melodies.length)]
+
 // A global bpm is declared which will ensure the bpm is the same for the beat and the melody
 let bpm = 150
 
 // This variable keeps track of if the melody has been played already
 let melodyPlayed = false
-
-const randomMelody = melodies[Math.floor(Math.random() * melodies.length)]
 
 // TWY sends you a welcome message
 window.addEventListener('load', () => {
@@ -186,104 +187,104 @@ function twyResetConversation(response) {
 
 // Function that checks if the speech matches certain words
 function compareData(speechToText) {
+    let synonyms
 
-    // Arrays with synonyms for the different voice commands
-    const beat = ['beat', 'doe maar wat', 'random', 'ritme', 'slagwerk', 'trommel', 'kick', 'kik', 'snare', 'hihat', 'basedrum', 'tom', 'crash', 'rid']
-    const melody = ['melodie', 'melody', 'lied', 'deun', 'loop', 'tune', 'wijs', 'muziekstuk', 'riedel', 'klank', 'compositie']
-    const slower = ['langzaam', 'sloom', 'slomer', 'slow', 'traag', 'trager', 'treuzelend', 'zacht', 'kalm', 'rustig', 'lui', 'geleidelijk', 'saai']
-    const faster = ['fast', 'speed', 'snel', 'hard', 'rap', 'vlug', 'vlot', 'gauw', 'subiet']
-    const effect = ['effect', 'effekt', 'perfect', 'transitie', 'gevolg', 'lijp']
-
-    // Merge all the arrays
-    const checkIfExists = beat.concat(melody, slower, faster, effect)
-
-    // Converts the array into string so it can be used in the search function
-    const existsToString = checkIfExists.toString()
+    // Fetches the synonyms from the json file
+    fetch('./json/data.json')
+        .then(res => res.json())
+        // Puts the data into the synonyms variable
+        .then(data => synonyms = data)
+        // Puts the data into the function so it can check what the user said
+        .then(() => findSynonyms(synonyms))
 
     // Handles the specific answers to the voice commands
-    if (speechToText.search(existsToString)) {
-        // Check if the question contains any synonym of the word 'beat'
-        beat.filter((item) => {
-            if (speechToText.includes(item)) {
-                // The specific reply that will be 'sent' if you trigger the beat 
-                const reply = 'What do you think of this sick beat? Do you think the tempo should be adjusted? Otherwise we will continue with a melody.'
-                twyResponseMessage(reply)
+    function findSynonyms(synonymArray) {
+        // Converts the arrays into string so it can be searched by the first if statement
+        let stringedSynonyms = JSON.stringify(synonymArray)
+        if (speechToText.search(stringedSynonyms)) {
+            // Check if the question contains any synonym of the word 'beat'
+            synonymArray[0].beat.filter((item) => {
+                if (speechToText.includes(item)) {
+                    // The specific reply that will be 'sent' if you trigger the beat 
+                    const reply = 'What do you think of this sick beat? Do you think the tempo should be adjusted? Otherwise we will continue with a melody.'
+                    twyResponseMessage(reply)
 
-                // Sets a delay and then it will play the beat
-                setTimeout(() => {
-                    setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-                }, 1500)
-            }
-        })
-        // Checks if the question contains any synonym of the word 'slower'
-        slower.filter((item) => {
-            if (speechToText.includes(item)) {
-                const reply = 'Okay so you want it slower. Consider it done!'
-                twyResponseMessage(reply)
+                    // Sets a delay and then it will play the beat
+                    setTimeout(() => {
+                        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+                    }, 1500)
+                }
+            })
+            // Checks if the question contains any synonym of the word 'slower'
+            synonymArray[0].slower.filter((item) => {
+                if (speechToText.includes(item)) {
+                    const reply = 'Okay so you want it slower. Consider it done!'
+                    twyResponseMessage(reply)
 
-                setTimeout(() => {
-                    bpm = bpm - 30
-                    setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-                    // Checks if the melody has been played already, if so it will also play the melody when the user says slower
-                    if (melodyPlayed == true) {
+                    setTimeout(() => {
+                        bpm = bpm - 30
+                        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+                        // Checks if the melody has been played already, if so it will also play the melody when the user says slower
+                        if (melodyPlayed == true) {
+                            setupMelody(randomMelody, bpm)
+                        }
+                    }, 1500)
+                }
+            })
+            // Checks if the question contains any synonym of the word 'faster'
+            synonymArray[0].faster.filter((item) => {
+                if (speechToText.includes(item)) {
+                    const reply = 'Okay so you want it faster.Consider it done!'
+                    twyResponseMessage(reply)
+
+                    setTimeout(() => {
+                        bpm = bpm + 30
+                        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+                        // Checks if the melody has been played already, if so it will also play the melody when the user says faster
+                        if (melodyPlayed == true) {
+                            setupMelody(randomMelody, bpm)
+                        }
+                    }, 1500)
+                }
+            })
+            // Checks if the question contains any synonym of the word 'melody'
+            synonymArray[0].melody.filter((item) => {
+                if (speechToText.includes(item)) {
+                    const reply = 'Nice, let`s spice it up with more melody! How about this?'
+                    twyResponseMessage(reply)
+
+                    setTimeout(() => {
+                        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
                         setupMelody(randomMelody, bpm)
-                    }
-                }, 1500)
-            }
-        })
-        // Checks if the question contains any synonym of the word 'faster'
-        faster.filter((item) => {
-            if (speechToText.includes(item)) {
-                const reply = 'Okay so you want it faster.Consider it done!'
-                twyResponseMessage(reply)
+                        melodyPlayed = true
+                    }, 1500)
+                }
+            })
+            // Checks if the question contains any synonym of the word 'effect'
+            synonymArray[0].effect.filter((item) => {
+                if (speechToText.includes(item)) {
+                    const reply = 'Now it really gets sick! The music may start to sound weird for now.'
+                    twyResponseMessage(reply)
 
-                setTimeout(() => {
-                    bpm = bpm + 30
-                    setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-                    // Checks if the melody has been played already, if so it will also play the melody when the user says faster
-                    if (melodyPlayed == true) {
-                        setupMelody(randomMelody, bpm)
-                    }
-                }, 1500)
-            }
-        })
-        // Checks if the question contains any synonym of the word 'melody'
-        melody.filter((item) => {
-            if (speechToText.includes(item)) {
-                const reply = 'Nice, let`s spice it up with more melody! How about this?'
-                twyResponseMessage(reply)
+                    setTimeout(() => {
+                        setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
+                        // Checks if the melody has been played already, if so it will play the melody with the effect over it
+                        if (melodyPlayed == true) {
+                            setupMelody(randomMelody, bpm)
+                            setupEffect()
+                        }
+                    }, 1500)
 
-                setTimeout(() => {
-                    setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-                    setupMelody(randomMelody, bpm)
-                    melodyPlayed = true
-                }, 1500)
-            }
-        })
-        // Checks if the question contains any synonym of the word 'effect'
-        effect.filter((item) => {
-            if (speechToText.includes(item)) {
-                const reply = 'Now it really gets sick! The music may start to sound weird for now.'
-                twyResponseMessage(reply)
-
-                setTimeout(() => {
-                    setupBeat(underEight, underThirteen, underFive, randomKick, randomSnare, bpm)
-                    // Checks if the melody has been played already, if so it will play the melody with the effect over it
-                    if (melodyPlayed == true) {
-                        setupMelody(randomMelody, bpm)
-                        setupEffect()
-                    }
-                }, 1500)
-
-                setTimeout(() => {
-                    const endmessage = 'I did everything to make a cool tune for you. If you want to make another one, press the button.'
-                    twyResetConversation(endmessage)
-                }, 2500)
-            }
-        })
-    } else if (checkIfExists.indexOf(speechToText) >= -1) { // If the question doesn't contain a synonym, show an 'error'
-        const reply = 'I don`t understand what you mean :(. Maybe you should say something else.'
-        twyResponseMessage(reply)
+                    setTimeout(() => {
+                        const endmessage = 'I did everything to make a cool tune for you. If you want to make another one, press the button.'
+                        twyResetConversation(endmessage)
+                    }, 2500)
+                }
+            })
+        } else if (synonymArray[0].indexOf(speechToText) >= -1) { // If the question doesn't contain a synonym, show an 'error'
+            const reply = 'I don`t understand what you mean :(. Maybe say something else.'
+            twyResponseMessage(reply)
+        }
     }
 }
 

@@ -11,6 +11,7 @@ const pauseButton = document.getElementById('pause')
 const loading = document.querySelector('.loading')
 const lighting = document.querySelector('.twy-image')
 const blade = document.querySelector('.blade')
+
 // These let have to be global and 'changable' because we only want one instance to exist
 let newMessage
 let userResponse
@@ -124,6 +125,7 @@ recognition.addEventListener('end', (e) => {
     compareData(lowerText)
 })
 
+// Event listeners to handle the play and pause actions
 playButton.addEventListener('click', play)
 pauseButton.addEventListener('click', pause)
 
@@ -234,7 +236,7 @@ function compareData(speechToText) {
             // Checks if the question contains any synonym of the word 'faster'
             synonymArray[0].faster.filter((item) => {
                 if (speechToText.includes(item)) {
-                    const reply = 'Okay so you want it faster.Consider it done!'
+                    const reply = 'Okay so you want it faster. Consider it done!'
                     twyResponseMessage(reply)
 
                     setTimeout(() => {

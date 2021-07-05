@@ -1,0 +1,12 @@
+Tussen de bestanden vind je het mapje json met daar in het bestandje data.json. In dat bestandje staan alle termen waarop TWY reageerd. Er zijn vijf categorieën, beat, melody, faster, slower en effect. Zoals de namen al aangeven zijn dit de acties om een beat te laten maken, een melody er over te zetten, het sneller of langzamer te laten afspelen en om een effect toe te voegen. 
+
+Mocht je er iets bij willen zetten kun je dat eenvoudig doen door eerst te kijken bij welke categorie je iets wilt toe voegen. Dan schrijf je onder aan de categorielijst de term die je wilt toevoegen tussen aanhalings tekens. "eigenterm" zo dus. En aan de term die er boven staat voeg je een komma toe. Het zou er dan zo uit moeten zien:
+
+///////////////////
+"voorbeeld",
+"eigenterm"
+///////////////////
+
+Als je nog meer wilt toevoegen herhaal je het process. Maar let er dus op dat elke term een komma er achter moet hebben en de laatste in de lijst juist niet.
+
+Vervolgens sla je het bestand op en nu kun je de term zeggen tegen TWY en zal ze het herkennen.

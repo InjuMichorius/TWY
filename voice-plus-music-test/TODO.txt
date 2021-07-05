@@ -1,6 +1,0 @@
-- Effecten aan muziek toevoegen
-- Meer ransomizen
-- Testjes voor bugs
-- Inju's spraak visualisatie toevoegen
-- Design Rationale schrijven
-- Reflecteren op het project en eigen leerdoelen

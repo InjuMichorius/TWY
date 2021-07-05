@@ -211,7 +211,7 @@ function compareData(speechToText) {
             // Checks if the question contains any synonym of the word 'melody'
             synonymArray[0].melody.filter((item) => {
                 if (speechToText.includes(item)) {
-                    const reply = 'Nice, let`s spice it up with more melody! How about this?'
+                    const reply = 'Nice, let`s spice it up with more melody! How does this sound? Do you want to add an effect over it too?'
                     twyResponseMessage(reply)
 
                     setTimeout(() => {
